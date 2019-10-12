@@ -16,8 +16,7 @@
     <script>
         $(document).ready(function() {
             $('#Registrar').click(function() {
-                var focus1,focus2,focus3,focus4,focus5,focus6,focus7;
-                var sexo = $('#sexo').val().trim();
+                var focus2,focus3,focus4,focus5,focus6,focus7;
                 var consultorio = $('#consultorio').val().trim();
                 var estudio = $('#estudio').val().trim();
                 var subestudio = $('#subest').val().trim();
@@ -31,11 +30,7 @@
                 x.setFullYear(vldfecha[0], vldfecha[1] - 1, vldfecha[2]);
                 fechaactual = new Date();
                 /**************************************************************************/
-                if (sexo == 0) {
-                    alert("Debe Seleccionar el Genero del Paciente");
-                    focus1 = document.getElementById("sexo").focus();
-                    return false;
-                }else if (consultorio == 0) {
+                if (consultorio == 0) {
                     alert("Debe Seleccionar un Consultorio");
                     focus2 = document.getElementById("consultorio").focus();
                     return false;
@@ -88,15 +83,24 @@
                       	@foreach($pacientes as $pac)
                           <div class="form-group row">
                             <input type="hidden" name="id_pac" value="{{$pac->id}}">
-                            <div class="col-md-4 col-md-push-8">
+                            <div class="col-md-3 col-md-push-8">
+                              @if ($pac->genero == 'F')
+                                <label for="genero">Genero</label>
+                                <input class="form-control" disabled id="genero" type="text" placeholder="Genero" value="Femenino" title="Genero del Paciente">
+                              @elseif($pac->genero == 'M')
+                                <label for="genero">Genero</label>
+                                <input class="form-control" disabled id="genero" type="text" placeholder="Genero" value="Masculino" title="Genero del Paciente">
+                              @endif
+                            </div>
+                            <div class="col-md-3 col-md-push-8">
                               <label for="ced">Cédula</label>
                               <input class="form-control" disabled id="ced" type="text" placeholder="Cédula" value="{{$pac->cedula}}" title="Cédula del Paciente">
                             </div>
-                            <div class="col-md-4 col-md-pull-8">
+                            <div class="col-md-3 col-md-pull-8">
                               <label for="nom">Nombre</label>
                               <input class="form-control" disabled id="nom" type="text" placeholder="Nombre" title="Nombre del Paciente" value="{{$pac->nombre}}">
                             </div>
-                            <div class="col-md-4 col-md-pull-8">
+                            <div class="col-md-3 col-md-pull-8">
                               <label for="ape">Apellido</label>
                               <input class="form-control" disabled id="ape" type="text" placeholder="Apellido" title="Apellido del Paciente" value="{{$pac->apellido}}">
                             </div>
@@ -121,21 +125,10 @@
                           <hr>
                             @foreach ($referencia as $ref)
                               <input type="hidden" name="id_ref" value="{{$ref->id}}">
-                              <input type="hidden" name="id_real" value="{{$nombre_real}}">
+                              <input type="hidden" name="id_real" value="{{$id_real}}">
                             @endforeach
                             <input class="form-control" id="edad" name="edad" type="hidden" placeholder="Edad" value="{{$edad->y}}" title="Edad del Paciente" >
                             <div class="form-group row">
-                                <div class="col-md-4 col-md-push-8" {{ $errors->has('sexo') ? 'has-error' : '' }}>
-                                    <label for="sexo">Genero</label>
-                                    <select name="sexo" id="sexo" required class="form-control" title="Genero del paciente">
-                                        <option selected value="">Genero</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="M">Masculino</option>
-                                    </select>
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{!! $errors -> first('sexo', '<span class=error>:message</span>') !!}</strong>
-                                    </span>
-                                </div>
                                 <div class="col-md-4 col-md-push-8">
                                     <label for="consultorio">Consultorio</label>
                                     <select id="consultorio" name="consultorio" class="form-control{{ $errors->has('consultorio') ? ' is-invalid' : '' }}" title="Selecciona un Consultorio">>
@@ -161,9 +154,7 @@
                                         </span>
                                     @endif
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-3 col-md-push-8">
+                                <div class="col-md-4 col-md-push-8">
                                     <label for="subest">Sub-estudio</label>
                                     <select id="subest"  name="subest" class="form-control{{ $errors->has('subest') ? ' is-invalid' : '' }}" title="Selecciona un Sub-Estudio"><option selected>Selecciona un Sub-Estudio</option></select>
                                     @if ($errors->has('subest'))
@@ -172,7 +163,9 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="col-md-3 col-md-push-8">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4 col-md-push-8">
                                     <label for="precio">Precio</label>
                                     <select id="precio"  name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" title="Seleccione Precio"><option selected>Seleccione Precio</option></select>
                                     @if ($errors->has('precio'))
@@ -181,7 +174,7 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="col-md-3 col-md-push-8" {{ $errors->has('tipo_cita') ? 'has-error' : '' }}>
+                                <div class="col-md-4 col-md-push-8" {{ $errors->has('tipo_cita') ? 'has-error' : '' }}>
                                     <label for="tipo_cita">Tipo de Cita</label>
                                     <select name="tipo_cita" id="tipo_cita" required class="form-control" title="Tipo de cita">
                                         <option selected value="">Seleccione Tipo de Cita</option>
@@ -190,7 +183,7 @@
                                     </select>
                                     {!! $errors -> first('tipo_cita', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-3 col-md-push-8" {{ $errors->has('fecha') ? 'has-error' : '' }}>
+                                <div class="col-md-4 col-md-push-8" {{ $errors->has('fecha') ? 'has-error' : '' }}>
                                     <label for="fecha">Fecha de Registro</label>
                                     <input type="date" name="fecha" id="fecha" class="form-control">
                                     {!! $errors -> first('fecha', '<span class=error>:message</span>') !!}

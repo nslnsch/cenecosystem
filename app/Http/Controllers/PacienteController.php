@@ -59,6 +59,7 @@ class PacienteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'genero' => 'required',
             'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
             'nombre' => 'required',
             'apellido' => 'required',
@@ -66,25 +67,31 @@ class PacienteController extends Controller
             'fecnac' => 'required',
             'direccion' => 'required'
         ]);
-        $paciente = new Paciente;
-        $paciente->cedula = $request->cedula;
-        $paciente->nombre = ucwords(strtolower($request->nombre));
-        $paciente->apellido = ucwords(strtolower($request->apellido));
-        $paciente->telefono = $request->telefono;
-        $paciente->fecnac = $request->fecnac;
-        $paciente->dirhab = $request->direccion;
-        $paciente->save();
-        \DB::table('bitacora')->insert(
-        [
-            'id_user' => Auth::user()->id,
-            'ip' => request()->ip(),
-            'log' => "Se ha registrado un nuevo paciente ".ucwords(strtolower($request->nombre))." ".ucwords(strtolower($request->apellido)),
-            'fecha' => date("Y-m-d")
-        ]
-        );
-        Session::flash('message','Paciente Registrado con Exito!');
-        return redirect()-> route('paciente.create');
-
+        $validate_pac = Paciente::all()->where('cedula','like',$request->genero);
+        if($validate_pac->isEmpty()){
+            $paciente = new Paciente;
+            $paciente->genero = $request->genero;
+            $paciente->cedula = $request->cedula;
+            $paciente->nombre = ucwords(strtolower($request->nombre));
+            $paciente->apellido = ucwords(strtolower($request->apellido));
+            $paciente->telefono = $request->telefono;
+            $paciente->fecnac = $request->fecnac;
+            $paciente->dirhab = $request->direccion;
+            $paciente->save();
+            \DB::table('bitacora')->insert(
+            [
+                'id_user' => Auth::user()->id,
+                'ip' => request()->ip(),
+                'log' => "Se ha registrado un nuevo paciente ".ucwords(strtolower($request->nombre))." ".ucwords(strtolower($request->apellido)),
+                'fecha' => date("Y-m-d")
+            ]
+            );
+            Session::flash('message','Paciente Registrado con Exito!');
+            return redirect()-> route('paciente.create');
+        }else{
+            Session::flash('message','Lo Sentimos esta Cédula ya pertenece a un paciente');
+            return redirect()-> route('paciente.create');
+        }
     }
 
     /**
@@ -97,6 +104,7 @@ class PacienteController extends Controller
     public function update(Request $request, Paciente $paciente)
     {
         $request->validate([
+            'genero' => 'required',
             'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
             'nombre' => 'required',
             'apellido' => 'required',
@@ -104,7 +112,7 @@ class PacienteController extends Controller
             'fecnac' => 'required',
             'direccion' => 'required'
         ]);
-
+        $paciente->genero = $request->genero;
         $paciente->cedula = $request->cedula;
         $paciente->nombre = ucwords(strtolower($request->nombre));
         $paciente->apellido = ucwords(strtolower($request->apellido));

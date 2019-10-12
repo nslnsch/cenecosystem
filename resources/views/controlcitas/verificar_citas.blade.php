@@ -83,7 +83,7 @@
                                     <th>Consultorio</th>
                                     <th>Estudio</th>
                                     <th>Sub-Estudio</th>
-                                    <th colspan="2">Acción</th>
+                                    <th colspan="6">Acción</th>
                                 </tr>
                             </thead>
                             @foreach ($query as $dato)
@@ -97,34 +97,35 @@
                                         <td>{{$dato->comp}}</td>
                                         <td>
                                             @if ($dato->estado == "Entregado")
-                                                <a href="#" onclick="return false" class="btn btn-success" title="Estado del Estudio: Entregado">
+                                                <a href="#" onclick="return false" class="btn btn-success btn-sm" title="Estado del Estudio: Entregado">
                                                     <i class="fas fa-check"></i>
-                                                </a>
-                                                <a href="{{route('citas.show',$dato->id)}}" class="btn btn-info" title="Ver Información completa de la cita">
+                                                </a></td><td>
+                                                <a href="{{route('citas.show',$dato->id)}}" class="btn btn-info btn-sm" title="Ver Información completa de la cita">
                                                     <i class="far fa-eye"></i>
-                                                </a>
-                                                <a href="{{route('citas.edit',$dato->id)}}" onclick="return false" class="btn btn-warning" title="Editar">
+                                                </a></td><td>
+                                                <a href="{{route('citas.edit',$dato->id)}}" onclick="return false" class="btn btn-warning btn-sm" title="Editar">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
+                                                </a></td><td>
                                                 <form action="{{route('citas.destroy',$dato->id)}}" style="display:inline-block;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" disabled title="Eliminar" onclick="return confirm('Realmente desea eliminar esta cita?')"><i  class="fa fa-trash"></i></button>
-                                                </form>
+                                                    <button type="submit" class="btn btn-danger btn-sm" disabled title="Eliminar" onclick="return confirm('Realmente desea eliminar esta cita?')"><i  class="fa fa-trash"></i></button>
+                                                </form></td>
                                             @else
-                                                <a href="javascript:enviardatos('{{route('check',$dato->id)}}')" class="btn btn-danger" title="Estado del Estudio: En Espera">
+
+                                               <td><a href="javascript:enviardatos('{{route('check',$dato->id)}}')" class="btn btn-danger btn-sm" title="Estado del Estudio: En Espera">
                                                     <i class="far fa-clock"></i>
-                                                </a>
-                                                <a href="{{route('citas.show',$dato->id)}}" class="btn btn-info" title="Ver Información completa de la cita">
+                                                </a></td><td>
+                                                <a href="{{route('citas.show',$dato->id)}}" class="btn btn-info btn-sm" title="Ver Información completa de la cita">
                                                     <i class="far fa-eye"></i>
-                                                </a>
-                                                <a href="{{route('citas.edit',$dato->id)}}" class="btn btn-warning" title="Editar">
+                                                </a></td><td>
+                                                <a href="{{route('citas.edit',$dato->id)}}" class="btn btn-warning btn-sm" title="Editar">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>
-                                                </a>
+                                                </a></td><td>
                                                 <form action="{{route('citas.destroy',$dato->id)}}" style="display:inline-block;" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" title="Eliminar" onclick="return confirm('Realmente desea eliminar esta cita?')"><i  class="fa fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm('Realmente desea eliminar esta cita?')"><i  class="fa fa-trash"></i></button>
                                                 </form>
                                             @endif
                                         </td>

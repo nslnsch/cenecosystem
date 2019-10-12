@@ -8,6 +8,20 @@
 </style>
 <script>
     $(document).ready(function() {
+        $('#Registrar').click(function() {
+            var focus;
+            var genero = $('#genero').val().trim();
+            /**************************************************************************/
+            if (genero == 0) {
+                alert("Debe Seleccionar el Genero del Paciente");
+                focus = document.getElementById("genero").focus();
+                return false;
+            }else {
+
+            }
+        });
+    });
+    $(document).ready(function() {
         var options = {
             translation: {
                 '0': {pattern: /\d/},
@@ -107,17 +121,30 @@
                             @method('PUT')
 
                                 <div class="form-group row">
-                                    <div class="col-md-4 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
+                                    <div class="col-md-3 col-md-push-8" {{ $errors->has('genero') ? 'has-error' : '' }}>
+                                        <label class="text-primary" for="genero">Genero</label>
+                                        <select name="genero" id="genero" required class="form-control" title="Genero del paciente">
+                                            @if ($pac->genero == 'M')
+                                              <option selected value="{{$pac->genero}}">Masculino</option>
+                                            @elseif($pac->genero == 'F')
+                                              <option selected value="{{$pac->genero}}">Femenino</option>
+                                            @endif
+                                            <option value="F">Femenino</option>
+                                            <option value="M">Masculino</option>
+                                        </select>
+                                        {!! $errors -> first('genero', '<span class=error>:message</span>') !!}
+                                    </div>
+                                    <div class="col-md-3 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
                                         <label for="Cedula" class="text-primary">Cédula</label>
                                         <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de niños sin cédula ingresar V-00000000-0" placeholder="Cédula" value="{{$pac->cedula}}">
                                         {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                     </div>
-                                    <div class="col-md-4 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
+                                    <div class="col-md-3 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
                                         <label for="nombre" class="text-primary">Nombre</label>
                                         <input type="text" name="nombre" required class="form-control" id="nombre" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL nombre no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Nombre" value="{{$pac->nombre}}">
                                         {!! $errors -> first('nombre', '<span class=error>:message</span>') !!}
                                     </div>
-                                    <div class="col-md-4 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
+                                    <div class="col-md-3 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
                                         <label for="apellido" class="text-primary">Apellido</label>
                                         <input type="text" name="apellido" required class="form-control" id="apellido" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL apellido no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Apellido" value="{{$pac->apellido}}">
                                         {!! $errors -> first('apellido', '<span class=error>:message</span>') !!}

@@ -49,7 +49,7 @@
                                 <div class="col-md-4 col-md-push-8" {{ $errors->has('cod_estudio') ? 'has-error' : '' }}>
                                     <label for="cod_estudio" class="text-primary">Seleccione un Estudio</label>
                                     <select name="cod_estudio" id="cod_estudio" required class="form-control" title="Codigo del Estudio">
-                                        <option selected value="">{{$subestudio->id_est}}</option>
+                                        <option selected value="{{$nombre_est->id}}">{{$nombre_est->nombre_est}}</option>
                                         @foreach ($estudios as $key => $estudio)
                                             <option value="{{$key}}">{{$estudio}}</option>
                                         @endforeach

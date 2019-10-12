@@ -1,5 +1,58 @@
 @extends('admin')
 @section('content')
+<script>
+	$(document).ready(function(){
+		$('.custom-control-input').click(function () {
+			var tipo_ref = $('input:radio[name=ref]:checked').val();
+			if ($.trim(tipo_ref) != '') {
+                $.get('getreferencia/', {tipo_ref: tipo_ref}, function (referencia) {
+                    $('#referencia').empty();
+                    $('#referencia').append("<option value=''>Selecciona una Referencia</option>");
+
+                    $.each(referencia, function (index, value) {
+                        $('#referencia').append("<option value='" + index + "'>" + value +"</option>");
+                    })
+                });
+            }
+		});
+	});
+</script>
+<script>
+	$(document).ready(function(){
+		$('#search').keyup(function () {
+			var buscar = $('#search').val();
+			var tipo_ref = $('input:radio[name=ref]:checked').val();
+			if ($.trim(tipo_ref) != '') {
+                $.get('getfiltrar/', {tipo_ref: tipo_ref,buscar: buscar}, function (buscador) {
+                    $('#referencia').empty();
+                    $('#referencia').append("<option value=''>Selecciona una Referencia</option>");
+
+                    $.each(buscador, function (index, value) {
+                        $('#referencia').append("<option value='" + index + "'>" + value +"</option>");
+                    })
+                });
+            }
+		});
+	});
+</script>
+<script>
+	$(document).ready(function(){
+        $("#frmref").submit(function() {
+        	var focus;
+            var ref = $('#referencia').val().trim();
+            if (ref == 0){
+                swal({
+            		type: "info",
+            		title: "Debe seleccionar una referencia valida!",
+            		showConfirmButton: false,
+            		timer: 3000
+        		});
+                focus = document.getElementById("referencia").focus();
+                return false;
+            }else{}
+        });
+	});
+</script>
     <div class="container-fluid with-mt">
     	<div class="row">
 	      <div class="table-responsive" style="color: #fff;border-radius: 10px;">
@@ -40,7 +93,7 @@
 	      </div>
     	</div>
 		<div class="row">
-        	<form class="col-12 form-signin" id="frmpac" method="POST" action="{{route('cita')}}" style="background-color: #fff;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
+        	<form class="col-12 form-signin" id="frmref" method="POST" action="{{route('cita')}}" style="background-color: #fff;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
         		@csrf
         		@foreach ($paciente as $dato)
         			<br>
@@ -51,30 +104,27 @@
 	        	<h2 class="text-primary text-center">Referencias<span class="glyphicon glyphicon-question-sign" style="float: right;" data-toggle="modal" data-target="#help" title="Ayuda"></span></h2>
 		        <hr>
 		           <div class="form-group">
-					<select class="form-control" id="int" name="id_ref" onchange="vldrefc(this.value);">
-						<option selected>Seleccione Referencia Interna</option>
-						@foreach ($referencia as $value)
-							@if ($value->tipo_ref == 'INT')
-								<option value="{{$value->id}}">{{$value->nombre_ref}}</option>
-							@endif
-						@endforeach
-		            </select>
-		          </div>
-		          <div class="form-group">
-		            <select class="form-control" id="ext" name="id_ref" onchange="vldrefc(this.value);">
-						<option selected>Seleccione Referencia Externa</option>
-						@foreach ($referencia as  $value)
-							@if ($value->tipo_ref == 'EXT')
-								<option value="{{$value->id}}">{{$value->nombre_ref}}</option>
-							@endif
-						@endforeach
-		            </select>
+					  <div class="custom-control custom-radio custom-control-inline">
+					    <input type="radio" class="custom-control-input" id="customRadio" name="ref" value="MED" required>
+					    <label class="custom-control-label" for="customRadio">Medicos</label>
+					  </div>
+					  <div class="custom-control custom-radio custom-control-inline">
+					    <input type="radio" class="custom-control-input" id="customRadio2" name="ref" value="TEC" required>
+					    <label class="custom-control-label" for="customRadio2">Tecnicos</label>
+					  </div>
+					  <div class="custom-control custom-radio custom-control-inline">
+					    <input type="radio" class="custom-control-input" id="customRadio3" name="ref" value="EXT" required>
+					    <label class="custom-control-label" for="customRadio3">Referencia Externa</label>
+					  </div>
+					  <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="buscar referencias" autocomplete="off" style="outline: 0;border-width: 0;">
+					  <hr>
+                      <select id="referencia"  name="referencia" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Selecciona una Referencia</option></select>
 		          </div>
 		          <div class="form-group">
 		            <select class="form-control" id="id_real" name="id_real">
 						<option selected>Seleccione quien realizará el estudio?</option>
 						@foreach ($referencia as  $value)
-							@if ($value->tipo_ref == 'INT')
+							@if ($value->tipo_ref == 'MED' || $value->tipo_ref == 'TEC')
 								<option value="{{$value->id}}">{{$value->nombre_ref}}</option>
 							@endif
 						@endforeach

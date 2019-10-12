@@ -31,6 +31,24 @@
     });
 
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#form").submit(function() {
+            var focus;
+            var cedula = $('#cedula').val().trim();
+            if (cedula === ""){
+                alert('El campo Cédula es obligatorio');
+                focus = document.getElementById("cedula").focus();
+            }else{
+                if(confirm('Cédula ingresada: '+cedula+' es Correcto?')){
+                }
+                else{
+                    return false;
+                }
+            }
+        });
+    });
+</script>
     @if(Session::has('message'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">{{ Session::get('message') }}...</div>
     @endif
@@ -42,11 +60,11 @@
                         <h4>Ingrese Cédula del Paciente</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('edit_pac_upd')}}" method="POST">
+                        <form action="{{route('edit_pac_upd')}}" method="POST" id="form">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-md-12 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
-                                    <label for="Cedula" class="text-primary">Cedula</label>
+                                    <label for="Cedula" class="text-primary">Cédula</label>
                                     <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de niños sin cédula ingresar V-00000000-0" placeholder="Cédula" autocomplete="off" autofocus>
                                     {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                 </div>

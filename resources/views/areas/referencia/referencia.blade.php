@@ -17,6 +17,7 @@
                         </form>
                         <table class="table table-striped">
                             <thead>
+                                <th>Cédula-Rif</th>
                                 <th>Nombre</th>
                                 <th>Telefono</th>
                                 <th>Tipo</th>
@@ -25,6 +26,7 @@
                             <tbody>
                                 @foreach ($datos as $dato)
                                     <tr>
+                                        <td>{{$dato->ced_rif}}</td>
                                         <td>{{$dato->nombre_ref}}</td>
                                         <td>{{$dato->telefono_ref}}</td>
                                         <td>{{$dato->tipo_ref}}</td>

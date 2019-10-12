@@ -72,7 +72,8 @@ class SubEstudioController extends Controller
     public function edit(CompEstudios $subestudio)
     {
         $estudios = Estudio::all()->pluck('nombre_est','id');
-        return view('areas.complemento.editcomplemento',compact('subestudio','estudios'));
+        $nombre_est = Estudio::all()->where('id','=',$subestudio->id_est)->first();
+        return view('areas.complemento.editcomplemento',compact('subestudio','estudios','nombre_est'));
     }
 
     /**

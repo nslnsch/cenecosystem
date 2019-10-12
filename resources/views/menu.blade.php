@@ -11,7 +11,7 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-clipboard-list nav-icon" aria-hidden="true"></i>
-                    Citas
+                    Registrar
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -29,7 +29,7 @@
                     <li class="nav-item">
                         <a href="{{ route("edit_pac") }}" class="nav-link {{ request()->is('citas/editpaciente') || request()->is('citas/editpaciente/*') ? 'active' : '' }}">
                             <i class="nav-icon far fa-edit"></i>
-                            Perfil del Paciente
+                            Actualizar Paciente
                         </a>
                     </li>
                 </ul>
@@ -37,19 +37,19 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-clipboard nav-icon" aria-hidden="true"></i>
-                    Control Citas
+                    Controlar Citas
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a href="{{ route("controlcita.index") }}" class="nav-link {{ request()->is('controlcitas/verificar_citas') || request()->is('controlcitas/verificar_citas/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar"></i>
-                            Lista Actual
+                            Listar Citas Actual
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route("controlcita.index") }}" class="nav-link {{ request()->is('citas/addpaciente') || request()->is('citas/addpaciente/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-alt"></i>
-                            Lista por Fecha
+                            Listar Citas por Fecha
                         </a>
                     </li>
                 </ul>
@@ -57,13 +57,13 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-file nav-icon" aria-hidden="true"></i>
-                    Consultas
+                    Historial
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a href="{{ route("sol_hist") }}" class="nav-link {{ request()->is('consultas/sol_hist') || request()->is('consultas/sol_hist/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-history"></i>
-                            Consultar Historial
+                            Listar Historial
                         </a>
                     </li>
                 </ul>
@@ -71,7 +71,7 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-ellipsis-h nav-icon" aria-hidden="true"></i>
-                    Registro de Areas
+                    Configuración
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -80,6 +80,7 @@
                             Registrar Referencias
                         </a>
                     </li>
+                    @role('super-admin|admin')
                     <li class="nav-item">
                         <a href="{{ route("consultorio.index") }}" class="nav-link {{ request()->is('areas/consultorio/consultorio') || request()->is('areas/consultorio/consultorio/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-clinic-medical"></i>
@@ -92,7 +93,6 @@
                             Registrar Estudios
                         </a>
                     </li>
-                    @role('super-admin|admin')
                     <li class="nav-item">
                         <a href="{{ route("subestudios.index") }}" class="nav-link {{ request()->is('seguridad/complemento') || request()->is('seguridad/complemento/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-edit"></i>
@@ -106,20 +106,20 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-tools nav-icon" aria-hidden="true"></i>
-                    Seguridad
+                    Gestionar Seguridad
                 </a>
                 <ul class="nav-dropdown-items">
 
                     <li class="nav-item">
                         <a href="{{ route("backup") }}" class="nav-link">
                             <i class="nav-icon fas fa-database"></i>
-                            Crear Respaldo
+                            Generar Respaldo
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route("bitacora.index") }}" class="nav-link {{ request()->is('seguridad/bitacora/bitacora') || request()->is('seguridad/bitacora/bitacora/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-shield-alt"></i>
-                            Historial de Acciones
+                            Bitacora
                         </a>
                     </li>
                 </ul>

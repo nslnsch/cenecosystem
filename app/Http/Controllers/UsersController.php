@@ -54,17 +54,24 @@ class UsersController extends Controller
             'fecha' => date("Y-m-d")
         ]
         );
-        $usuario = new User;
-        $usuario->id_rol = $request->rol;
-        $usuario->name = ucwords(strtolower($request->name));
-        $usuario->email = $request->email;
-        $usuario->password = bcrypt($request->password);
+        $validate_user = User::all()->where('email','like',$request->email);
+        if($validate_user->isEmpty()){
+            $usuario = new User;
+            $usuario->id_rol = $request->rol;
+            $usuario->name = ucwords(strtolower($request->name));
+            $usuario->email = $request->email;
+            $usuario->password = bcrypt($request->password);
 
-        if($usuario->save()){
-            $usuario->assignRole($request->rol);
+            if($usuario->save()){
+                $usuario->assignRole($request->rol);
+            }
+            Session::flash('message','Usuario Creado correctamente');
+            return redirect()-> route('usuario.index');
+        }else{
+            Session::flash('message','Lo Sentimos ya existe un Usuario con este Correo');
+            $roles= Role::all()->pluck('name','id');
+            return view('auth.create_user',compact('roles'));
         }
-        Session::flash('message','Usuario Creado correctamente');
-        return redirect()-> route('usuario.index');
     }
 
     /**

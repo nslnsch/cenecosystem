@@ -19,14 +19,8 @@ class CitaController extends Controller
     //Metodo para recaudar información y enviarla al formulario del registro de la cita
     public function addcita(Request $request){
         //verificar id de la referencia
-        if($request->id_ref == ''){
-            $id_ref = 0;
-        }else{
-            $id_ref=$request->id_ref;
-        }
+        $id_ref=$request->referencia;
         $id_real = $request->id_real;
-        $query_real=Referencia::all()->where('id','=',$id_real)->first();
-        $nombre_real = $query_real->nombre_ref;
         /****************************************************************/
         $referencia = Referencia::all()->where('id', 'like',$id_ref);
         //obterner los datos del paciente
@@ -35,7 +29,7 @@ class CitaController extends Controller
         //obtener datos del consultorio
         $consultorios = Consultorio::all();
         /****************************************************************/
-        return view('citas.addcita',compact('pacientes','referencia','consultorios','nombre_real'));
+        return view('citas.addcita',compact('pacientes','referencia','consultorios','id_real'));
     }
 
     //Metodo para cambiar status del estudio
@@ -62,8 +56,6 @@ class CitaController extends Controller
             'id_pac' => 'required',
             'estudio' => 'required',
             'id_ref' => 'required',
-            'edad' => 'required',
-            'sexo' => 'required',
             'subest' => 'required',
             'precio' => 'required',
             'tipo_cita' => 'required',
@@ -77,7 +69,6 @@ class CitaController extends Controller
         $cita->id_est = $request->estudio;
         $cita->id_ref = $request->id_ref;
         $cita->id_real = $request->id_real;
-        $cita->genero = $request->sexo;
         $cita->comp = $request->subest;
         $cita->estado = $estado;
         $cita->costo = $request->precio;
@@ -85,7 +76,7 @@ class CitaController extends Controller
         $cita->fecha =  $request->fecha;
         $cita->recibido =  $recibidopor;
         $cita->estado_pago =  $estado_pago;
-
+        $id_real = $request->id_real;
         //validar estudios
         $validate_estudio = DB::table('citas')
             ->join('pacientes', 'citas.id_pac', 'pacientes.id')
@@ -117,7 +108,7 @@ class CitaController extends Controller
             $pacientes = Paciente::all()->where('id', 'like',$request->id_pac);
             $consultorios = Consultorio::all();
             Session::flash('message','Lo Sentimos!! Se Alcanzó El Maximo de Registros en el Consultorio Seleccionado!');
-            return view('citas.addcita',compact('pacientes','referencia','consultorios'));
+            return view('citas.addcita',compact('pacientes','referencia','consultorios','id_real'));
         }else if($validate_estudio->isEmpty()){
         //condicional en caso de que no se cumplan las condiciones anteriores
         //guardar registro de la cita
@@ -140,7 +131,7 @@ class CitaController extends Controller
             $pacientes = Paciente::all()->where('id', 'like',$request->id_pac);
             $consultorios = Consultorio::all();
             Session::flash('message','El Estudio ya fue Registrado para este Paciente!');
-            return view('citas.addcita',compact('pacientes','referencia','consultorios'));
+            return view('citas.addcita',compact('pacientes','referencia','consultorios','id_real'));
         }
 
     }
@@ -189,7 +180,7 @@ class CitaController extends Controller
             ->join('estudios', 'citas.id_est', 'estudios.id')
             ->join('consultorios', 'estudios.id_consult', 'consultorios.id')
             ->join('referencias', 'citas.id_ref', 'referencias.id')
-            ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','pacientes.dirhab','pacientes.fecnac','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
+            ->select('citas.*','pacientes.genero','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','pacientes.dirhab','pacientes.fecnac','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
             ->where('citas.id','=',$cita->id)
             ->first();
         return view('citas.editcita',compact('pacientes','consultorios','datocita','referencia'));
@@ -207,8 +198,6 @@ class CitaController extends Controller
         $request->validate([
             'id_pac' => 'required',
             'estudio' => 'required',
-            'edad' => 'required',
-            'sexo' => 'required',
             'subest' => 'required',
             'precio' => 'required',
             'tipo_cita' => 'required',
@@ -216,7 +205,6 @@ class CitaController extends Controller
         ]);
         $estado = 'EnEspera';
         $recibidopor = 'EnEspera';
-        $cita->genero = $request->sexo;
         $cita->id_est = $request->estudio;
         $cita->comp = $request->subest;
         $cita->costo = $request->precio;

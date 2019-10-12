@@ -101,7 +101,7 @@ class SolicitudController extends Controller
             return view('citas.selreferencia',compact('paciente','consultorio','referencia','cons1','cons2','cons3','cons4','limit_c1','limit_c2','limit_c3','limit_c4','c1','c2','c3','c4'));
         }else{
             Session::flash('message','El Paciente no esta Registrado');
-            return redirect()-> route('sol_pac');
+            return redirect()-> route('paciente.create');
         }
     }
 
@@ -116,7 +116,7 @@ class SolicitudController extends Controller
             return view('citas.editpaciente',compact('paciente'));
         }else{
             Session::flash('message','El Paciente no esta Registrado');
-            return redirect()-> route('edit_pac');
+            return redirect()-> route('paciente.create');
         }
 
     }
@@ -186,5 +186,26 @@ class SolicitudController extends Controller
             return response()->json($subestudiospreciosArray);
         }
     }
-
+    //funcion para obtener las referencias
+    public function getreferencia(Request $request)
+    {
+        if ($request->ajax()) {
+            $tipo_referencia = Referencia::where('tipo_ref','=', $request->tipo_ref)->get();
+            foreach ($tipo_referencia as $tipo_ref) {
+                $tipo_referenciaArray[$tipo_ref->id] = $tipo_ref->nombre_ref;
+            }
+            return response()->json($tipo_referenciaArray);
+        }
+    }
+    //funcion para filtrar las referencias
+    public function getfiltrar(Request $request)
+    {
+        if ($request->ajax()) {
+            $datos_filtrados = Referencia::where('tipo_ref','=', $request->tipo_ref)->where('nombre_ref','like','%'.ucwords(strtolower(trim($request->buscar.'%'))))->get();
+            foreach ($datos_filtrados as $filtrados) {
+                $datos_filtradosArray[$filtrados->id] = $filtrados->nombre_ref;
+            }
+            return response()->json($datos_filtradosArray);
+        }
+    }
 }

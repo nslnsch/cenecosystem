@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="description" content="Sistema Neurofisiologia Clinica Occidental">
+    <meta name="keyword" content="Sistema Ceneco S.A">
     <title>Ceneco S.A</title>
     <link rel="shortcut icon" href="{{asset('img/cenecoicon.png')}}">
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -37,7 +38,7 @@
         color: red;
       }
       .with-mt{
-        margin-top: -21px;
+        margin-top: -15px;
       }
     </style>
     <script>
@@ -45,7 +46,7 @@
           $(".alert").fadeTo(500, 0).slideUp(500, function(){
               $(this).remove();
           });
-      }, 4000);
+      }, 5000);
     </script>
 </head>
 
@@ -137,7 +138,6 @@
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('js/block-bt.js') }}"></script>
-    <script src="{{ asset('js/vldref.js') }}"></script>
     <script src="{{ asset('js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/utils.js') }}"></script>
     <script>

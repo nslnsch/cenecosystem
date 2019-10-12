@@ -15,6 +15,7 @@ class CreateReferenciaTable extends Migration
     {
         Schema::create('referencias', function (Blueprint $table) {
             $table->Increments('id');
+            $table->string('ced_rif', 15)->unique();
             $table->string('nombre_ref',50);
             $table->string('telefono_ref',12);
             $table->string('tipo_ref',20);

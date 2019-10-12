@@ -40,25 +40,34 @@ class ReferenciaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
             'name' => 'required',
             'telefono' => 'required|regex:/^[0-9]{4}-[0-9]{7}$/',
             'tipo' => 'required',
         ]);
-        $referencia = new Referencia;
-        $referencia->nombre_ref = ucwords(strtolower($request->name));
-        $referencia->telefono_ref = $request->telefono;
-        $referencia->tipo_ref = $request->tipo;
-        $referencia->save();
-        \DB::table('bitacora')->insert(
-        [
-            'id_user' => Auth::user()->id,
-            'ip' => request()->ip(),
-            'log' => "Se ha registrado una nueva referencia: ".ucwords(strtolower($request->name)),
-            'fecha' => date("Y-m-d")
-        ]
-        );
-        Session::flash('message','Referencia Registrada con Exito!');
-        return redirect()-> route('referencias.index');
+        $validate_ref = Referencia::all()->where('ced_rif','like',$request->cedula);
+        if($validate_ref->isEmpty()){
+            $referencia = new Referencia;
+            $referencia->ced_rif = $request->cedula;
+            $referencia->nombre_ref = ucwords(strtolower($request->name));
+            $referencia->telefono_ref = $request->telefono;
+            $referencia->tipo_ref = $request->tipo;
+            $referencia->save();
+            \DB::table('bitacora')->insert(
+            [
+                'id_user' => Auth::user()->id,
+                'ip' => request()->ip(),
+                'log' => "Se ha registrado una nueva referencia: ".ucwords(strtolower($request->name)),
+                'fecha' => date("Y-m-d")
+            ]
+            );
+            Session::flash('message','Referencia Registrada con Exito!');
+            return redirect()-> route('referencias.index');
+        }else{
+            Session::flash('message','La Cédula ó Rif de esta Referencia ya fue Registrada');
+            return view('areas.referencia.addreferencia');
+        }
+
     }
 
     /**
@@ -82,10 +91,12 @@ class ReferenciaController extends Controller
     public function update(Request $request, Referencia $referencia)
     {
         $request->validate([
+            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
             'name' => 'required',
             'telefono' => 'required|regex:/^[0-9]{4}-[0-9]{7}$/',
             'tipo' => 'required',
         ]);
+        $referencia->ced_rif = $request->cedula;
         $referencia->nombre_ref = ucwords(strtolower($request->name));
         $referencia->telefono_ref = $request->telefono;
         $referencia->tipo_ref = $request->tipo;
@@ -100,6 +111,7 @@ class ReferenciaController extends Controller
         );
         Session::flash('message','Referencia Actualizada correctamente');
         return redirect()-> route('referencias.index');
+
     }
 
     /**

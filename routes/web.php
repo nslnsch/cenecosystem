@@ -11,10 +11,13 @@
 |
 */
 
-//Raiz
+//Raiz Noscript
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.noscript');
 });
+
+//Login
+Route::get('/login', 'HomeController@login')->name('login');
 
 //Vista Principal
 Route::get('/home', 'HomeController@index')->name('home');
@@ -37,6 +40,8 @@ Route::group(['middleware' => ['permission:create']], function () {
     Route::get('getestudios','SolicitudController@getEstudios')->name('getestudios');
     Route::get('getsubestudios','SolicitudController@getSubEstudios')->name('getsubestudios');
     Route::get('getprecio','SolicitudController@getPrecio')->name('getprecio');
+    Route::get('getreferencia','SolicitudController@getreferencia')->name('getreferencia');
+    Route::get('getfiltrar','SolicitudController@getfiltrar')->name('getfiltrar');
 
     //Registro de Citas
     Route::resource('citas','CitaController');

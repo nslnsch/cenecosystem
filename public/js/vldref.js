@@ -1,8 +1,7 @@
 function vldref(){
-	refint=document.getElementById("int").selectedIndex;
-	refext=document.getElementById("ext").selectedIndex;
+	ref=document.getElementById("referencia").selectedIndex;
 	id_real=document.getElementById("id_real").selectedIndex;
-	if (refint === 0 && refext === 0){
+	if (ref === 0){
         swal({
             type: "info",
             title: "Debe seleccionar una referencia valida!",

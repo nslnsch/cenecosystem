@@ -1,6 +1,9 @@
 @extends('admin')
 @section('content')
-    <div class="container">
+    @if(Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('message') }}...</div>
+    @endif
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">

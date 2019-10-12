@@ -14,6 +14,20 @@
 </style>
 <script>
     $(document).ready(function() {
+        $('#Registrar').click(function() {
+            var focus;
+            var genero = $('#genero').val().trim();
+            /**************************************************************************/
+            if (genero == 0) {
+                alert("Debe Seleccionar el Genero del Paciente");
+                focus = document.getElementById("genero").focus();
+                return false;
+            }else {
+
+            }
+        });
+    });
+    $(document).ready(function() {
         var options = {
             translation: {
                 '0': {pattern: /\d/},
@@ -110,17 +124,26 @@
                         <form action="{{route('paciente.store')}}" method="POST">
                             @csrf
                             <div class="form-group row">
-                                <div class="col-md-4 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
+                                <div class="col-md-3 col-md-push-8" {{ $errors->has('genero') ? 'has-error' : '' }}>
+                                    <label for="genero">Genero</label>
+                                    <select name="genero" id="genero" required class="form-control" title="Genero del paciente">
+                                        <option selected value="">Genero</option>
+                                        <option value="F">Femenino</option>
+                                        <option value="M">Masculino</option>
+                                    </select>
+                                    {!! $errors -> first('genero', '<span class=error>:message</span>') !!}
+                                </div>
+                                <div class="col-md-3 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
                                     <label for="Cedula" class="text-primary">Cédula</label>
                                     <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de niños sin cédula ingresar V-00000000-0" placeholder="Cédula">
                                     {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-4 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
+                                <div class="col-md-3 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
                                     <label for="nombre" class="text-primary">Nombres</label>
                                     <input type="text" name="nombre" required class="form-control" id="nombre" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL nombre no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Nombre">
                                     {!! $errors -> first('nombre', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-4 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
+                                <div class="col-md-3 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
                                     <label for="apellido" class="text-primary">Apellidos</label>
                                     <input type="text" name="apellido" required class="form-control" id="apellido" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL apellido no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Apellido">
                                     {!! $errors -> first('apellido', '<span class=error>:message</span>') !!}
@@ -146,7 +169,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Verifique los datos del Paciente antes de Registrar?')"><i class="fas fa-plus"></i> Registrar</button>
+                                    <button type="submit" id="Registrar" class="btn btn-primary" onclick="return confirm('Verifique los datos del Paciente antes de Registrar?')"><i class="fas fa-plus"></i> Registrar</button>
                                 </div>
                                 <div class="col-md-6">
                                     <a href="{{route('home')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</a>

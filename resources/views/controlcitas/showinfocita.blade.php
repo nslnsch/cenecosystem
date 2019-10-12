@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
-                    <div class="card-header text-primary text-center">
+                    <div class="card-header bg-primary text-center">
                         <h4>Información de la Cita</h4><i class="far fa-question-circle" style="float: right;margin-top: -30px;font-size: 20px;" data-toggle="modal" data-target="#modal_help" title="Ayuda"></i>
                     </div>
                     <div class="card-body">
@@ -24,15 +24,24 @@
                         <hr>
                           <div class="form-group row">
                             <input type="hidden" name="id_pac" value="{{$pacientes->id}}">
-                            <div class="col-md-4 col-md-push-8">
+                            <div class="col-md-3 col-md-push-8">
+                              @if ($pacientes->genero == 'F')
+                                <label for="genero">Genero</label>
+                                <input class="form-control" disabled id="genero" type="text" placeholder="Genero" value="Femenino" title="Genero del Paciente">
+                              @elseif($pacientes->genero == 'M')
+                                <label for="genero">Genero</label>
+                                <input class="form-control" disabled id="genero" type="text" placeholder="Genero" value="Masculino" title="Genero del Paciente">
+                              @endif
+                            </div>
+                            <div class="col-md-3 col-md-push-8">
                               <label for="ced">Cédula</label>
                               <input class="form-control" disabled id="ced" type="text" placeholder="Cédula" value="{{$pacientes->cedula}}" title="Cédula del Paciente">
                             </div>
-                            <div class="col-md-4 col-md-pull-8">
+                            <div class="col-md-3 col-md-pull-8">
                               <label for="nom">Nombre</label>
                               <input class="form-control" disabled id="nom" type="text" placeholder="Nombre" title="Nombre del Paciente" value="{{$pacientes->nombre}}">
                             </div>
-                            <div class="col-md-4 col-md-pull-8">
+                            <div class="col-md-3 col-md-pull-8">
                               <label for="ape">Apellido</label>
                               <input class="form-control" disabled id="ape" type="text" placeholder="Apellido" title="Apellido del Paciente" value="{{$pacientes->apellido}}">
                             </div>
@@ -57,24 +66,15 @@
                             <input class="form-control" id="edad" name="edad" type="hidden" placeholder="Edad" value="{{$edad->y}}" title="Edad del Paciente" >
                             @foreach ($datos as $dato)
                               <div class="form-group row">
-                                  <div class="col-md-3 col-md-push-8">
-                                      @if ($dato->genero == 'M')
-                                      <label for="sexo">Genero</label>
-                                        <input type="text" name="sexo" disabled id="sexo" required title="Genero del paciente" value="Masculino" class="form-control">
-                                      @elseif($dato->genero == 'F')
-                                      <label for="sexo">Genero</label>
-                                        <input type="text" name="sexo" disabled id="sexo" required title="Genero del paciente" value="Femenino" class="form-control">
-                                      @endif
-                                  </div>
-                                  <div class="col-md-3 col-md-push-8">
+                                  <div class="col-md-4 col-md-push-8">
                                       <label for="estado">Estado del Estudio</label>
                                       <input type="text" name="estado" disabled id="estado" required title="Estado del Estudio" value="{{$dato->estado}}" class="form-control">
                                   </div>
-                                  <div class="col-md-3 col-md-push-8">
+                                  <div class="col-md-4 col-md-push-8">
                                       <label for="consultorio">Consultorio</label>
                                       <input type="text" id="consultorio" disabled name="consultorio" title="Consultorio" value="{{$dato->nombre_consult}}" class="form-control">
                                   </div>
-                                  <div class="col-md-3 col-md-push-8">
+                                  <div class="col-md-4 col-md-push-8">
                                       <label for="estudio">Estudio</label>
                                       <input type="text" id="estudio" disabled name="estudio" title="Estudio" value="{{$dato->nombre_est}}" class="form-control">
                                   </div>
