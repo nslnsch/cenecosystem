@@ -36,7 +36,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
-                    <div class="card-header text-primary text-center">
+                    <div class="card-header bg-primary text-center">
                         <h4>Actualizar Estudio</h4><i class="far fa-question-circle" style="float: right;margin-top: -30px;font-size: 20px;" data-toggle="modal" data-target="#modal_help" title="Ayuda"></i>
                     </div>
                     <div class="card-body">
@@ -65,7 +65,7 @@
                                     <button type="submit" class="btn btn-primary" id="registrar" onclick="return confirm('Verifique los datos del Estudio antes de Actualizar?')"><i class="fas fa-pen"></i> Actualizar</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{route('estudio.index')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
+                                    <a href="{{ url()->previous() }}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
                                 </div>
                             </div>
                         </form>

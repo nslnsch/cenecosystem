@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
-                    <div class="card-header text-primary text-center">
+                    <div class="card-header bg-primary text-center">
                         <h4>Actualizar Usuario</h4>
                     </div>
                     <div class="card-body">

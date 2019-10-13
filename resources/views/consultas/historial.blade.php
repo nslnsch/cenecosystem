@@ -6,10 +6,10 @@
                 <div class="card" style="border-radius: 10px;">
                     <div class="card-header bg-primary">
                       <div class="form-group row">
-                        <div class="col-6">
-                            <strong>Historial de Pacientes</strong>
+                        <div class="col-md-6 col-md-push-8">
+                            <h4>Historial de Pacientes</h4>
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-md-push-8">
                               <a href="{{route('home')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</a>
                         </div>
                       </div>

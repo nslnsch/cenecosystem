@@ -7,8 +7,16 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
-                    <div class="card-header ">Lista de Sub-Estudios
-                        <a href="{{route('subestudios.create')}}"><button class="btn btn-primary d-block float-right ml-auto"><i class="fas fa-user-plus"></i> Nuevo</button></a>
+                    <div class="card-header bg-primary">
+                        <div class="form-group row">
+                            <div class="col-md-6 col-md-push-8">
+                                <h4>Lista de Sub-Estudios</h4>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-6 col-md-push-8">
+                                <a href="{{route('home')}}" class="btn btn-danger float-right d-block ml-auto" title="Cerrar"><i class="fas fa-times"></i> Cerrar</a>
+                                <a href="{{route('subestudios.create')}}"><button class="btn btn-primary d-block float-right ml-auto"><i class="fas fa-user-plus"></i> Nuevo</button></a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form action="{{route('search.complemento')}}" method="POST">

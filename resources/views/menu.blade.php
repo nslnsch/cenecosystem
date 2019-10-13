@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("controlcita.index") }}" class="nav-link {{ request()->is('citas/addpaciente') || request()->is('citas/addpaciente/*') ? 'active' : '' }}">
+                        <a href="{{ route("index_fecha") }}" class="nav-link {{ request()->is('controlcitas/verificar_citas_fecha') || request()->is('controlcitas/verificar_citas_fecha/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-alt"></i>
                             Listar Citas por Fecha
                         </a>
@@ -119,7 +119,7 @@
                     <li class="nav-item">
                         <a href="{{ route("bitacora.index") }}" class="nav-link {{ request()->is('seguridad/bitacora/bitacora') || request()->is('seguridad/bitacora/bitacora/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-shield-alt"></i>
-                            Bitacora
+                            Bitácora
                         </a>
                     </li>
                 </ul>

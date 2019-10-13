@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
-                    <div class="card-header text-primary text-center">
+                    <div class="card-header bg-primary text-center">
                         <h4>Nuevo Usuario</h4>
                     </div>
                     <div class="card-body">
@@ -46,7 +46,7 @@
                                     <button type="submit" class="btn btn-primary" onclick="return confirm('Verifique los datos del Usuario antes de Registrar?')"><i class="fas fa-user-plus"></i> Registrar</button>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{{route('usuario.index')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
+                                    <a href="{{ url()->previous() }}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
                                 </div>
                             </div>
                         </form>

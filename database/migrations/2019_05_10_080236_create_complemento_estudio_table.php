@@ -17,7 +17,7 @@ class CreateComplementoEstudioTable extends Migration
             $table->Increments('id');
             $table->unsignedInteger('id_est');
             $table->string('subestudio',20);
-            $table->double('precio',8,2);
+            $table->double('precio',8,3);
             $table->foreign('id_est','fk_complemento_estudio_estudio')->references('id')->on('estudios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

@@ -35,7 +35,17 @@ class CitaController extends Controller
     //Metodo para cambiar status del estudio
     public function check(Request $request, Cita $cita)
     {
+        $cita = Cita::all()->where('id','like',$request->id)->first();
+        $pac = Paciente::all()->where('id','like',$cita->id_pac)->first();
         $status = 'Entregado';
+        \DB::table('bitacora')->insert(
+        [
+            'id_user' => Auth::user()->id,
+            'ip' => request()->ip(),
+            'log' => "Se Entrego el Estudio del Paciente ".$pac->nombre." ".$pac->apellido,
+            'fecha' => date("Y-m-d")
+        ]
+        );
         $recibidopor = substr($request->id, 11);
         $query = Cita::all()->where('id','=',$request->id)->first();
         $query->estado = $status;
@@ -43,7 +53,37 @@ class CitaController extends Controller
         $query->save();
         return redirect()-> route('controlcita.index');
     }
-
+    //Metodo para cambiar status del estudio desde el rango de fecha
+    public function check_fecha(Request $request, Cita $cita)
+    {
+        $fecha1 = ($request->fecha1);
+        $fecha2 = (substr($request->fecha2,0, 10));
+        $cita = Cita::all()->where('id','like',$request->id)->first();
+        $pac = Paciente::all()->where('id','like',$cita->id_pac)->first();
+        $status = 'Entregado';
+        \DB::table('bitacora')->insert(
+        [
+            'id_user' => Auth::user()->id,
+            'ip' => request()->ip(),
+            'log' => "Se Entrego el Estudio del Paciente ".$pac->nombre." ".$pac->apellido,
+            'fecha' => date("Y-m-d")
+        ]
+        );
+        $recibidopor = substr($request->fecha2,20,50);
+        $query = Cita::all()->where('id','=',$request->id)->first();
+        $query->estado = $status;
+        $query->recibido = $recibidopor;
+        $query->save();
+        $query = DB::table('citas')
+            ->join('pacientes', 'citas.id_pac', 'pacientes.id')
+            ->join('estudios', 'citas.id_est', 'estudios.id')
+            ->join('consultorios', 'estudios.id_consult', 'consultorios.id')
+            ->join('referencias', 'citas.id_ref', 'referencias.id')
+            ->select('citas.*','pacientes.genero','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
+            ->whereBetween('citas.fecha', [$fecha1, $fecha2])
+            ->paginate(4);
+        return view('controlcitas.verificar_citas_fecha',compact('query','fecha1','fecha2'));
+    }
     /**
      * Store a newly created resource in storage.
      *

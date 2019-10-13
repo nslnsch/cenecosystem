@@ -225,7 +225,7 @@
                                   </button>
                               </div>
                               <div class="col-md-6">
-                                  <a href="{{route('controlcita.index')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
+                                  <a href="{{ url()->previous() }}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-undo-alt"></i> Regresar</a>
                               </div>
                           </div>
                       </form>

@@ -47,6 +47,7 @@ Route::group(['middleware' => ['permission:create']], function () {
     Route::resource('citas','CitaController');
     Route::post('cita','CitaController@addcita')->name('cita');
     Route::get('/check/{id}','CitaController@check')->name('check');
+    Route::get('/check_fecha/{id}/{fecha1}/{fecha2}','CitaController@check_fecha')->name('check_fecha');
 
     //Registro de Referencias
     Route::resource('referencias','ReferenciaController');
@@ -69,7 +70,9 @@ Route::group(['middleware' => ['permission:create']], function () {
 
     //Control citas
     Route::resource('controlcita','ControlCitasController');
+    Route::get('index_fecha','ControlCitasController@index_fecha')->name('index_fecha');
     Route::get('verify_cita', 'ControlCitasController@verify_cita')->name('verify_cita');
+    Route::get('verify_cita_fecha', 'ControlCitasController@verify_cita_fecha')->name('verify_cita_fecha');
 
     //Reportes
     Route::get('/imprimir', 'ReporteController@imprimir')->name('imprimir');

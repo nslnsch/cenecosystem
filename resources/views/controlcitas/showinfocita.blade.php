@@ -123,7 +123,7 @@
                             @endforeach
                             <div class="form-group row">
                                 <div class="col-md-12">
-                                    <a href="{{route('controlcita.index')}}" class="btn btn-danger d-block float-right ml-auto"><i class="fas fa-undo-alt"></i> Regresar</a>
+                                    <a href="{{ url()->previous() }}" class="btn btn-danger d-block float-right ml-auto"><i class="fas fa-undo-alt"></i> Regresar</a>
                                 </div>
                             </div>
                     </div>

@@ -11,6 +11,45 @@
             }else{}
         }
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#Buscar').click(function() {
+                var focus;
+                var fecha = $('#fecha1').val().trim();
+                var fecha2 = $('#fecha2').val().trim();
+                /**************************************************************************/
+                date = fecha;
+                x = new Date();
+                vldfecha = date.split("-");
+                x.setFullYear(vldfecha[0], vldfecha[1] - 1, vldfecha[2]);
+                fechaactual = new Date();
+                /**************************************************************************/
+                date2 = fecha2;
+                y = new Date();
+                vldfecha2 = date2.split("-");
+                y.setFullYear(vldfecha2[0], vldfecha2[1] - 1, vldfecha2[2]);
+                fechaactual2 = new Date();
+                /**************************************************************************/
+                if (fecha == null || fecha == "") {
+                    alert("Debe Seleccionar la fecha desde");
+                    focus = document.getElementById("fecha1").focus();
+                    return false;
+                } else if (x > fechaactual) {
+                    alert("Fecha Desde Invalida! debe ingresar una fecha menor ó igual a la actual.");
+                    focus = document.getElementById("fecha1").focus();
+                    return false;
+                }else if (fecha2 == null || fecha2 == ""){
+                    alert("Debe Seleccionar la fecha hasta");
+                    focus = document.getElementById("fecha2").focus();
+                    return false;
+                }else if (y > fechaactual2) {
+                    alert("Fecha Hasta Invalida! debe ingresar una fecha menor ó igual a la actual.");
+                    focus = document.getElementById("fecha2").focus();
+                    return false;
+                }else{}
+            });
+        });
+    </script>
     @if(Session::has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('message') }}...</div>
     @endif
@@ -19,13 +58,13 @@
             <div class="col-md-12">
                 <div class="card" style="border-radius: 10px;">
                     <div class="card-header bg-primary text-center">
-                        <h4>Control de Citas Actuales</h4>
+                        <h4>Control de Citas por Rango de Fechas</h4>
                     </div>
                     <div class="card-header bg-white">
-                        <form action="{{route('verify_cita')}}" method="get">
+                        <form action="{{route('verify_cita_fecha')}}" method="get">
                             <div class="form-group row">
                                 <div class="col-md-6 col-md-push-8">
-                                    <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="Buscar citas por Cédula ó por Nombre" style="border-width: 0;outline: 0;" autocomplete="off"><button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+                                    Desde <input type="date" class="form-controller" id="fecha1" maxlength="25" name="fecha1" autofocus placeholder="Buscar" title="Buscar citas por rango de fechas" style="border-width: 0;outline: 0;" autocomplete="off" required> Hasta <input type="date" class="form-controller" id="fecha2" maxlength="25" name="fecha2" autofocus placeholder="Buscar" title="Buscar citas por rango de fechas" style="border-width: 0;outline: 0;" autocomplete="off" required><button type="submit" class="btn btn-primary" id="Buscar"><i class="fas fa-search"></i> Buscar</button>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-6 col-md-push-8">
                                     <a href="{{route('home')}}" class="btn btn-danger float-right d-block ml-auto" title="Cerrar"><i class="fas fa-times"></i> Cerrar</a>
@@ -36,7 +75,7 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <input type="hidden" name="fecha" id="fecha" value="{{ Date::parse('now')->format('Y-m-d')}}"><p>Fecha: <strong>{{ Date::parse('now')->format('d/m/Y')}}</strong></p>
+                        <p>Desde: <strong>{{ Date::parse($fecha1)->format('d/m/Y')}}</strong> Hasta: <strong>{{ Date::parse($fecha2)->format('d/m/Y')}}</strong></p>
                         <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -85,7 +124,7 @@
                                                 </td>
                                             @else
                                                <td>
-                                                    <a href="javascript:enviardatos('{{route('check',$dato->id)}}')" class="btn btn-danger btn-sm" title="Estado del Estudio: En Espera">
+                                                    <a href="javascript:enviardatos('{{route('check_fecha', ['id' => $dato->id, 'fecha1' => $fecha1, 'fecha2' => $fecha2])}}')" class="btn btn-danger btn-sm" title="Estado del Estudio: En Espera">
                                                     <i class="far fa-clock"></i>
                                                     </a>
                                                 </td>
