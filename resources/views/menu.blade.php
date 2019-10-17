@@ -11,7 +11,7 @@
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-clipboard-list nav-icon" aria-hidden="true"></i>
-                    Registrar
+                    Gestionar Citas
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -55,23 +55,15 @@
                 </ul>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link  nav-dropdown-toggle">
-                <i class="fas fa-file nav-icon" aria-hidden="true"></i>
-                    Historial
+                <a href="{{ route("sol_hist") }}" class="nav-link {{ request()->is('consultas/sol_hist') || request()->is('consultas/sol_hist/*') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-history"></i>
+                        Consultar Historial
                 </a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a href="{{ route("sol_hist") }}" class="nav-link {{ request()->is('consultas/sol_hist') || request()->is('consultas/sol_hist/*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-history"></i>
-                            Listar Historial
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-ellipsis-h nav-icon" aria-hidden="true"></i>
-                    Configuración
+                    Configurar
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -117,9 +109,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route("restore") }}" class="nav-link">
+                            <i class="nav-icon fas fa-database"></i>
+                            Restaurar Respaldo
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route("bitacora.index") }}" class="nav-link {{ request()->is('seguridad/bitacora/bitacora') || request()->is('seguridad/bitacora/bitacora/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-shield-alt"></i>
-                            Bitácora
+                            Consultar Bitácora
                         </a>
                     </li>
                 </ul>

@@ -11,45 +11,6 @@
             }else{}
         }
     </script>
-    <script>
-        $(document).ready(function() {
-            $('#Buscar').click(function() {
-                var focus;
-                var fecha = $('#fecha1').val().trim();
-                var fecha2 = $('#fecha2').val().trim();
-                /**************************************************************************/
-                date = fecha;
-                x = new Date();
-                vldfecha = date.split("-");
-                x.setFullYear(vldfecha[0], vldfecha[1] - 1, vldfecha[2]);
-                fechaactual = new Date();
-                /**************************************************************************/
-                date2 = fecha2;
-                y = new Date();
-                vldfecha2 = date2.split("-");
-                y.setFullYear(vldfecha2[0], vldfecha2[1] - 1, vldfecha2[2]);
-                fechaactual2 = new Date();
-                /**************************************************************************/
-                if (fecha == null || fecha == "") {
-                    alert("Debe Seleccionar la fecha desde");
-                    focus = document.getElementById("fecha1").focus();
-                    return false;
-                } else if (x > fechaactual) {
-                    alert("Fecha Desde Invalida! debe ingresar una fecha menor ó igual a la actual.");
-                    focus = document.getElementById("fecha1").focus();
-                    return false;
-                }else if (fecha2 == null || fecha2 == ""){
-                    alert("Debe Seleccionar la fecha hasta");
-                    focus = document.getElementById("fecha2").focus();
-                    return false;
-                }else if (y > fechaactual2) {
-                    alert("Fecha Hasta Invalida! debe ingresar una fecha menor ó igual a la actual.");
-                    focus = document.getElementById("fecha2").focus();
-                    return false;
-                }else{}
-            });
-        });
-    </script>
     @if(Session::has('message'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">{{ Session::get('message') }}...</div>
     @endif
@@ -63,12 +24,15 @@
                     <div class="card-header bg-white">
                         <form action="{{route('verify_cita_fecha')}}" method="get">
                             <div class="form-group row">
+                                <div class="col-md-2 col-md-push-8">
+                                    <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="Buscar citas por Cédula ó por Nombre" style="border-width: 0;outline: 0;" autocomplete="off">
+                                </div>
                                 <div class="col-md-6 col-md-push-8">
                                     Desde <input type="date" class="form-controller" id="fecha1" maxlength="25" name="fecha1" autofocus placeholder="Buscar" title="Buscar citas por rango de fechas" style="border-width: 0;outline: 0;" autocomplete="off" required> Hasta <input type="date" class="form-controller" id="fecha2" maxlength="25" name="fecha2" autofocus placeholder="Buscar" title="Buscar citas por rango de fechas" style="border-width: 0;outline: 0;" autocomplete="off" required><button type="submit" class="btn btn-primary" id="Buscar"><i class="fas fa-search"></i> Buscar</button>
                                 </div>
-                                <div class="col-6 col-sm-6 col-md-6 col-md-push-8">
+                                <div class="col-6 col-sm-6 col-md-4 col-md-push-8">
                                     <a href="{{route('home')}}" class="btn btn-danger float-right d-block ml-auto" title="Cerrar"><i class="fas fa-times"></i> Cerrar</a>
-                                    <a href="{{route('imprimir')}}">
+                                    <a href="{{route('imprimir_citas_fechas', ['fecha1' => $fecha1, 'fecha2' => $fecha2])}}">
                                     <button type="button" class="btn btn-warning float-right d-block ml-auto" id="imprimir" title="Imprimir Reporte"><i class="fas fa-print"></i> Imprimir</button></a>
                                 </div>
                             </div>

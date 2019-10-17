@@ -1,8 +1,9 @@
 @extends('admin')
 @section('content')
+<!----//primera seccion de busqueda------------------------------------------------------------->
 <script>
 	$(document).ready(function(){
-		$('.custom-control-input').click(function () {
+		$('.info').click(function () {
 			var tipo_ref = $('input:radio[name=ref]:checked').val();
 			if ($.trim(tipo_ref) != '') {
                 $.get('getreferencia/', {tipo_ref: tipo_ref}, function (referencia) {
@@ -35,11 +36,49 @@
 		});
 	});
 </script>
+<!----//segunda seccion de busqueda------------------------------------------------------------->
+<script>
+	$(document).ready(function(){
+		$('.real').click(function () {
+			var tipo_ref = $('input:radio[name=ref2]:checked').val();
+			if ($.trim(tipo_ref) != '') {
+                $.get('getreferencia/', {tipo_ref: tipo_ref}, function (referencia) {
+                    $('#referencia2').empty();
+                    $('#referencia2').append("<option value=''>Quien Realiza el Estudio</option>");
+
+                    $.each(referencia, function (index, value) {
+                        $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
+                    })
+                });
+            }
+		});
+	});
+</script>
+<script>
+	$(document).ready(function(){
+		$('#search2').keyup(function () {
+			var buscar = $('#search2').val();
+			var tipo_ref = $('input:radio[name=ref2]:checked').val();
+			if ($.trim(tipo_ref) != '') {
+                $.get('getfiltrar/', {tipo_ref: tipo_ref,buscar: buscar}, function (buscador) {
+                    $('#referencia2').empty();
+                    $('#referencia2').append("<option value=''>Quien Realiza el Estudio</option>");
+
+                    $.each(buscador, function (index, value) {
+                        $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
+                    })
+                });
+            }
+		});
+	});
+</script>
+<!-------------validacion de listas desplegables------------------------------------------------>
 <script>
 	$(document).ready(function(){
         $("#frmref").submit(function() {
-        	var focus;
+        	var focus,focus1;
             var ref = $('#referencia').val().trim();
+            var ref2 = $('#referencia2').val().trim();
             if (ref == 0){
                 swal({
             		type: "info",
@@ -49,10 +88,20 @@
         		});
                 focus = document.getElementById("referencia").focus();
                 return false;
+            }else if(ref2 == 0){
+                swal({
+            		type: "info",
+            		title: "Debe seleccionar quien realizará el estudio!",
+            		showConfirmButton: false,
+            		timer: 3000
+        		});
+                focus1 = document.getElementById("referencia2").focus();
+                return false;
             }else{}
         });
 	});
 </script>
+<!---------------------------------------------------------------------------------------------->
     <div class="container-fluid with-mt">
     	<div class="row">
 	      <div class="table-responsive" style="color: #fff;border-radius: 10px;">
@@ -103,32 +152,54 @@
 				<hr>
 	        	<h2 class="text-primary text-center">Referencias<span class="glyphicon glyphicon-question-sign" style="float: right;" data-toggle="modal" data-target="#help" title="Ayuda"></span></h2>
 		        <hr>
-		           <div class="form-group">
+		           <div class="form-group row">
+		           	<div class="col-md-2 col-md-push-8">
+		           		<div class="custom-control custom-radio custom-control-inline">
+					    	<input type="radio" class="custom-control-input info" id="customRadio" name="ref" value="MED" required>
+					    	<label class="custom-control-label" for="customRadio">Médicos</label>
+					  	</div>
+		           	</div>
+		           	<div class="col-md-2 col-md-push-8">
+						<div class="custom-control custom-radio custom-control-inline">
+						    <input type="radio" class="custom-control-input info" id="customRadio3" name="ref" value="EXT" required>
+						    <label class="custom-control-label" for="customRadio3">Referencia Externa</label>
+						 </div>
+					</div>
+					<div class="col-md-4 col-md-push-8">
 					  <div class="custom-control custom-radio custom-control-inline">
-					    <input type="radio" class="custom-control-input" id="customRadio" name="ref" value="MED" required>
-					    <label class="custom-control-label" for="customRadio">Medicos</label>
+					  	<input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="buscar referencias" autocomplete="off" style="outline: 0;border-width: 0;">
 					  </div>
+					</div>
+					<div class="col-md-4 col-md-push-8">
 					  <div class="custom-control custom-radio custom-control-inline">
-					    <input type="radio" class="custom-control-input" id="customRadio2" name="ref" value="TEC" required>
-					    <label class="custom-control-label" for="customRadio2">Tecnicos</label>
+						<select id="referencia"  name="referencia" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Selecciona una Referencia</option></select>
 					  </div>
-					  <div class="custom-control custom-radio custom-control-inline">
-					    <input type="radio" class="custom-control-input" id="customRadio3" name="ref" value="EXT" required>
-					    <label class="custom-control-label" for="customRadio3">Referencia Externa</label>
-					  </div>
-					  <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="buscar referencias" autocomplete="off" style="outline: 0;border-width: 0;">
-					  <hr>
-                      <select id="referencia"  name="referencia" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Selecciona una Referencia</option></select>
+					</div>
 		          </div>
-		          <div class="form-group">
-		            <select class="form-control" id="id_real" name="id_real">
-						<option selected>Seleccione quien realizará el estudio?</option>
-						@foreach ($referencia as  $value)
-							@if ($value->tipo_ref == 'MED' || $value->tipo_ref == 'TEC')
-								<option value="{{$value->id}}">{{$value->nombre_ref}}</option>
-							@endif
-						@endforeach
-		            </select>
+		          <hr>
+		          <div class="form-group row">
+		           	<div class="col-md-2 col-md-push-8">
+		           		<div class="custom-control custom-radio custom-control-inline">
+					    	<input type="radio" class="custom-control-input real" id="customRadio1" name="ref2" value="MED" required>
+					    	<label class="custom-control-label" for="customRadio1">Médicos</label>
+					  	</div>
+		           	</div>
+		           	<div class="col-md-2 col-md-push-8">
+						<div class="custom-control custom-radio custom-control-inline">
+						    <input type="radio" class="custom-control-input real" id="customRadio2" name="ref2" value="TEC" required>
+						    <label class="custom-control-label" for="customRadio2">Técnicos</label>
+						 </div>
+					</div>
+					<div class="col-md-4 col-md-push-8">
+					  <div class="custom-control custom-radio custom-control-inline">
+					  	<input type="text" class="form-controller" id="search2" maxlength="25" name="search" autofocus placeholder="Buscar" title="buscar referencias" autocomplete="off" style="outline: 0;border-width: 0;">
+					  </div>
+					</div>
+					<div class="col-md-4 col-md-push-8">
+					  <div class="custom-control custom-radio custom-control-inline">
+						<select id="referencia2" name="id_real"  name="referencia" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Quien Realiza el Estudio</option></select>
+					  </div>
+					</div>
 		          </div>
 		          <hr>
 		          <div class="form-group row">

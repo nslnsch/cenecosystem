@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//RestaurarDB
+Route::get('/restore', 'DatabaseController@restore')->name('restore');
 
 //Raiz Noscript
 Route::get('/', function () {
@@ -76,6 +78,7 @@ Route::group(['middleware' => ['permission:create']], function () {
 
     //Reportes
     Route::get('/imprimir', 'ReporteController@imprimir')->name('imprimir');
+    Route::get('/imprimir_citas_fechas/{fecha1}/{fecha2}', 'ReporteController@imprimir_citas_fechas')->name('imprimir_citas_fechas');
     Route::get('/imprimir.bitacora/{fecha}', 'ReporteController@imprimir_bitacora')->name('imprimir.bitacora');
 
     //Logout

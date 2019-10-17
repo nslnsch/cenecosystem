@@ -40,15 +40,24 @@ class ReferenciaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
+            'tipo_per' => 'required',
+            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-([0-9]{1,1})$/',
             'name' => 'required',
             'telefono' => 'required|regex:/^[0-9]{4}-[0-9]{7}$/',
             'tipo' => 'required',
         ]);
-        $validate_ref = Referencia::all()->where('ced_rif','like',$request->cedula);
-        if($validate_ref->isEmpty()){
+        $tipo_ced = substr($request->cedula,0,1);
+        $ced = strtoupper($tipo_ced);
+        $cedula = strtoupper($request->cedula);
+        //validando RIF de tipo Natural y Juridico
+        $validate_ref = Referencia::all()->where('ced_rif','like',$cedula);
+        if($request->tipo_per == 'J' && $ced == 'V' || $request->tipo_per == 'N' && $ced == 'J'){
+            Session::flash('message','Lo sentimos el RIF no coincide con el tipo de persona seleccionado');
+            return view('areas.referencia.addreferencia');
+        }elseif($validate_ref->isEmpty()){
             $referencia = new Referencia;
-            $referencia->ced_rif = $request->cedula;
+            $referencia->tipo_persona = $request->tipo_per;
+            $referencia->ced_rif = strtoupper($request->cedula);
             $referencia->nombre_ref = ucwords(strtolower($request->name));
             $referencia->telefono_ref = $request->telefono;
             $referencia->tipo_ref = $request->tipo;
@@ -64,10 +73,9 @@ class ReferenciaController extends Controller
             Session::flash('message','Referencia Registrada con Exito!');
             return redirect()-> route('referencias.index');
         }else{
-            Session::flash('message','La Cédula ó Rif de esta Referencia ya fue Registrada');
+            Session::flash('message','La Cédula ó Rif de esta Referencia ya fue Registrado');
             return view('areas.referencia.addreferencia');
         }
-
     }
 
     /**
@@ -91,11 +99,13 @@ class ReferenciaController extends Controller
     public function update(Request $request, Referencia $referencia)
     {
         $request->validate([
-            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
+            'tipo_per' => 'required',
+            'cedula' => 'required|regex:/^([VvEeJj]{1})-([0-9]{7,9})-([0-9]{1,1})$/',
             'name' => 'required',
             'telefono' => 'required|regex:/^[0-9]{4}-[0-9]{7}$/',
             'tipo' => 'required',
         ]);
+        $referencia->tipo_persona = $request->tipo_per;
         $referencia->ced_rif = $request->cedula;
         $referencia->nombre_ref = ucwords(strtolower($request->name));
         $referencia->telefono_ref = $request->telefono;

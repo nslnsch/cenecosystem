@@ -32,7 +32,7 @@
             <h3>CONTROL DE CITAS</h3>
             <hr>
             <header>
-                <p>Reporte de Citas dia: {{$today}} </p>
+                <p>Reporte de Citas desde: {{ Date::parse($fecha1)->format('d/m/Y')}} hasta {{ Date::parse($fecha2)->format('d/m/Y')}} </p>
                 <p>Total de Pacientes Atendidos: {{$atend}} </p>
             </header>
             <div class="row">

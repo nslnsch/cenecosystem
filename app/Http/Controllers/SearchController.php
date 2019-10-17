@@ -39,6 +39,7 @@ class SearchController extends Controller
         }else{
         	$datos = Referencia::where('nombre_ref', 'like', '%'.ucwords(strtolower(trim($request->search))).'%')
                 ->orWhere('tipo_ref', 'like', '%'.ucwords(strtolower(trim($request->search))).'%')
+                ->orWhere('ced_rif', 'like', '%'.ucwords(strtolower(trim($request->search))).'%')
                 ->orderBy('id', 'desc')->paginate(3);
             return view('areas.referencia.referencia',compact('datos'));
         }

@@ -60,7 +60,7 @@ class PacienteController extends Controller
     {
         $request->validate([
             'genero' => 'required',
-            'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
+            'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{1,1}?)$/',
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required|regex:/^([0-9]{4}-[0-9]{7})$/',
@@ -105,7 +105,7 @@ class PacienteController extends Controller
     {
         $request->validate([
             'genero' => 'required',
-            'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$/',
+            'cedula' => 'required|regex:/^([VvEe]{1})-([0-9]{7,9})-?([0-9]{1,1}?)$/',
             'nombre' => 'required',
             'apellido' => 'required',
             'telefono' => 'required|regex:/^([0-9]{4}-[0-9]{7})$/',

@@ -25,7 +25,8 @@
                         </form>
                         <table class="table table-striped">
                             <thead>
-                                <th>Cédula-Rif</th>
+                                <th>Tipo de Persona</th>
+                                <th>Rif Referencia</th>
                                 <th>Nombre</th>
                                 <th>Telefono</th>
                                 <th>Tipo</th>
@@ -34,6 +35,13 @@
                             <tbody>
                                 @foreach ($datos as $dato)
                                     <tr>
+                                        <td>
+                                            @if ($dato->tipo_persona == 'N')
+                                                Natural
+                                            @elseif($dato->tipo_persona == 'J')
+                                                Juridico
+                                            @endif
+                                        </td>
                                         <td>{{$dato->ced_rif}}</td>
                                         <td>{{$dato->nombre_ref}}</td>
                                         <td>{{$dato->telefono_ref}}</td>

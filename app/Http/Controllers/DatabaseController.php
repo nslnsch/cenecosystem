@@ -30,4 +30,8 @@ class DatabaseController extends Controller
         Session::flash('message','La base de datos ha sido respaldada correctamente');
         return redirect()-> route('home');
     }
+    public function restore()
+    {
+        return view('seguridad.restaurarDB.restaurardb');
+    }
 }

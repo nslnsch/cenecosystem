@@ -8,7 +8,7 @@
                 '1': {pattern: /[1-9]/},
                 '9': {pattern: /\d/, optional: true},
                 '#': {pattern: /\d/, recursive: true},
-                'C': {pattern: /V|v|E|e/, fallback: 'V'}
+                'C': {pattern: /V|v|E|e|J|j/, fallback: 'J'}
             }
         };
         $("#cedula").mask("C-19999999-9", options);
@@ -62,25 +62,36 @@
                         <form action="{{route('referencias.store')}}" method="POST">
                             @csrf
                             <div class="form-group row">
-                                <div class="col-md-3 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
-                                    <label for="Cedula" class="text-primary">Cédula-Rif</label>
-                                    <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e|J|j]{1})-([0-9]{7,9})-?([0-9]{0,9}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de Rif debe ingresar V-00000000-0" placeholder="Cédula-Rif">
+                                <div class="col-md-4 col-md-push-8" {{ $errors->has('tipo_per') ? 'has-error' : '' }}>
+                                    <label for="tipo_per" class="text-primary">Tipo de Referencia</label>
+                                    <select name="tipo_per" id="tipo_per" required class="form-control" title="EL campo tipo de persona no debe estar vacio">
+                                        <option selected value="{{ old('tipo_per') }}">Seleccione el Tipo de Persona</option>
+                                        <option value="N">Natural</option>
+                                        <option value="J">Juridico</option>
+                                    </select>
+                                    {!! $errors -> first('tipo_per', '<span class=error>:message</span>') !!}
+                                </div>
+                                <div class="col-md-4 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
+                                    <label for="Cedula" class="text-primary">Rif Referencia</label>
+                                    <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e|J|j]{1})-([0-9]{7,9})-([0-9]{1,1})$" title="El Rif se debe ingresar de la siguiente manera V-00000000-0 ó J-00000000-0" placeholder="Rif Referencia" value="{{ old('cedula') }}">
                                     {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-3 col-md-push-8"  {{ $errors->has('name') ? 'has-error' : '' }}>
+                                <div class="col-md-4 col-md-push-8"  {{ $errors->has('name') ? 'has-error' : '' }}>
                                     <label for="name" class="text-primary">Nombre</label>
-                                    <input type="text" name="name" required class="form-control" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" autocomplete="off" title="Formato correcto para el nombre de la referencia interna y externa XXX XXXX XXXX ó XX XXXX XXXX" placeholder="Nombre Referencia">
+                                    <input type="text" name="name" required class="form-control" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" autocomplete="off" title="Formato correcto para el nombre de la referencia interna y externa XXX XXXX XXXX ó XX XXXX XXXX" placeholder="Nombre Referencia" value="{{ old('name') }}">
                                     {!! $errors -> first('name', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-3 col-md-push-8" {{ $errors->has('telefono') ? 'has-error' : '' }}>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-md-push-8" {{ $errors->has('telefono') ? 'has-error' : '' }}>
                                     <label for="telefono" class="text-primary">Teléfono</label>
-                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del telefono debe ser el siguiente 0424-3333333" placeholder="Teléfono Referencia">
+                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del telefono debe ser el siguiente 0424-3333333" placeholder="Teléfono Referencia" value="{{ old('telefono') }}">
                                     {!! $errors -> first('telefono', '<span class=error>:message</span>') !!}
                                 </div>
-                                <div class="col-md-3 col-md-push-8" {{ $errors->has('tipo') ? 'has-error' : '' }}>
+                                <div class="col-md-6 col-md-push-8" {{ $errors->has('tipo') ? 'has-error' : '' }}>
                                     <label for="tipo" class="text-primary">Tipo de Referencia</label>
-                                    <select name="tipo" id="tipo" required class="form-control" pattern="^[a-zA-ZÁÉÍÓÚñáéíóúÑ]{7}" maxlength="7" title="EL campo tipo de referenciano debe estar vacio">
-                                        <option selected>Seleccione Tipo Referencia</option>
+                                    <select name="tipo" id="tipo" required class="form-control" title="EL campo tipo de referencia no debe estar vacio">
+                                        <option selected value="{{ old('tipo') }}">Seleccione Tipo Referencia</option>
                                         <option value="MED">Médicos</option>
                                         <option value="TEC">Técnicos</option>
                                         <option value="EXT">Externas</option>

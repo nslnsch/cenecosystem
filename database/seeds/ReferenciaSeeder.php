@@ -15,7 +15,8 @@ class ReferenciaSeeder extends Seeder
         //Gerente
 
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-00000000',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-00000000-0',
             'nombre_ref' => 'Por Definir',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'GTE'
@@ -24,13 +25,15 @@ class ReferenciaSeeder extends Seeder
         //Referencia Medicos
 
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-24537548',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-24537548-1',
             'nombre_ref' => 'Dra Maria Espinoza',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'MED'
         ]);
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-19145320',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-19145320-1',
             'nombre_ref' => 'Dr Hilarión Araujo',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'MED'
@@ -38,13 +41,15 @@ class ReferenciaSeeder extends Seeder
         //Referencia Tecnicos
 
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-18966006',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-18966006-1',
             'nombre_ref' => 'Nelson Torres',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'TEC'
         ]);
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-14540620',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-14540620-1',
             'nombre_ref' => 'Rafael Dugarte',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'TEC'
@@ -52,13 +57,15 @@ class ReferenciaSeeder extends Seeder
         //Referencia Externa
 
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-20531624',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-20531624-1',
             'nombre_ref' => 'Dr Trino Baptista',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'EXT'
         ]);
         $consultorio=Referencia::create([
-            'ced_rif' => 'V-9567234',
+            'tipo_persona' => 'N',
+            'ced_rif' => 'V-9567234-1',
             'nombre_ref' => 'Dr Ziomar López',
             'telefono_ref' => '0424-7683789',
             'tipo_ref' => 'EXT'
