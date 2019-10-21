@@ -56,7 +56,7 @@
                                     <td>{{$dato->apellido}}</td>
                                     <td>{{$dato->nombre_est}}</td>
                                     <td>{{$dato->comp}}</td>
-                                    <td>{{$dato->costo}} Bs</td>
+                                    <td>{{number_format($dato->costo)}} Bs.</td>
                                     <td>{{$dato->estado}}</td>
                                     <td>{{$dato->estado_pago}}</td>
                                 </tr>

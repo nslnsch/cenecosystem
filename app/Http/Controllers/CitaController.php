@@ -7,6 +7,7 @@ use App\Paciente;
 use App\Consultorio;
 use App\Referencia;
 use App\Cita;
+use App\CitaRef;
 use App\Estudio;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -90,7 +91,7 @@ class CitaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Cita $citaref)
     {
         $request->validate([
             'id_pac' => 'required',
@@ -108,10 +109,9 @@ class CitaController extends Controller
         $cita->id_pac = $request->id_pac;
         $cita->id_est = $request->estudio;
         $cita->id_ref = $request->id_ref;
-        $cita->id_real = $request->id_real;
         $cita->comp = $request->subest;
         $cita->estado = $estado;
-        $cita->costo = $request->precio;
+        $cita->costo = intval(preg_replace('/[^0-9]+/', '', $request->precio), 10);
         $cita->tipo_cita = $request->tipo_cita;
         $cita->fecha =  $request->fecha;
         $cita->recibido =  $recibidopor;
@@ -153,6 +153,12 @@ class CitaController extends Controller
         //condicional en caso de que no se cumplan las condiciones anteriores
         //guardar registro de la cita
             $cita->save();
+            $cita = Cita::all()->last();
+            $id_cita = $cita->id;
+            $citaref = new CitaRef;
+            $citaref->id_cita = $id_cita;
+            $citaref->id_real = $request->id_real;
+            $citaref->save();
             //traer informacion del paciente para guardar en bitacora
             $pac = Paciente::all()->where('id','like',$request->id_pac)->first();
             \DB::table('bitacora')->insert(
@@ -200,8 +206,11 @@ class CitaController extends Controller
             ->join('referencias', 'citas.id_ref', 'referencias.id')
             ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
             ->where('citas.id','=',$cita->id)
-            ->get();
-        return view('controlcitas.showinfocita',compact('pacientes','datos'));
+            ->first();
+        $id_cita = CitaRef::all()->where('id_cita','like',$datos->id)->first();
+        $realizado = $id_cita->id_real;
+        $referencia=Referencia::all()->where('id','like',$realizado)->first();
+        return view('controlcitas.showinfocita',compact('pacientes','datos','referencia'));
     }
 
     /**
@@ -214,7 +223,6 @@ class CitaController extends Controller
     {
         $pacientes = Paciente::all()->where('id', 'like',$cita->id_pac);
         $consultorios = Consultorio::all();
-        $referencia=Referencia::all();
         $datocita = DB::table('citas')
             ->join('pacientes', 'citas.id_pac', 'pacientes.id')
             ->join('estudios', 'citas.id_est', 'estudios.id')
@@ -223,6 +231,9 @@ class CitaController extends Controller
             ->select('citas.*','pacientes.genero','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','pacientes.dirhab','pacientes.fecnac','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
             ->where('citas.id','=',$cita->id)
             ->first();
+        $id_cita = CitaRef::all()->where('id_cita','like',$datocita->id)->first();
+        $realizado = $id_cita->id_real;
+        $referencia=Referencia::all()->where('id','like',$realizado)->first();
         return view('citas.editcita',compact('pacientes','consultorios','datocita','referencia'));
     }
 
@@ -233,7 +244,7 @@ class CitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cita $cita)
+    public function update(Request $request, Cita $cita, CitaRef $citaref)
     {
         $request->validate([
             'id_pac' => 'required',
@@ -247,14 +258,17 @@ class CitaController extends Controller
         $recibidopor = 'EnEspera';
         $cita->id_est = $request->estudio;
         $cita->comp = $request->subest;
-        $cita->costo = $request->precio;
+        $cita->costo = intval(preg_replace('/[^0-9]+/', '', $request->precio), 10);
         $cita->tipo_cita = $request->tipo_cita;
         $cita->fecha =  $request->fecha;
         $cita->estado = $estado;
         $cita->recibido =  $recibidopor;
-        $cita->id_real =  $request->id_real;
         $cita->estado_pago =  $request->edo_pago;
+
         $cita->save();
+        $citaref = CitaRef::all()->where('id_cita','=',$cita->id)->first();
+        $citaref->id_real =  $request->id_real;
+        $citaref->save();
         $pac = Paciente::all()->where('id','like',$cita->id_pac)->first();
         \DB::table('bitacora')->insert(
         [

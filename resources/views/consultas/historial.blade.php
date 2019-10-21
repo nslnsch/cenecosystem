@@ -33,8 +33,10 @@
                                 <tr>
                                     <td><strong>Estudio:</strong> {{$cita->nombre_est}}</td>
                                     <td><strong>Sub-Estudio:</strong> {{$cita->comp}}</td>
-                                    <td><strong>Precio:</strong> {{$cita->costo}}</td>
-                                    <td><strong>Realizado Por:</strong> {{$cita->id_real}}</td>
+                                    <td><strong>Precio:</strong> {{number_format($cita->costo)}} Bs.</td>
+                                    @if(($referencia = App\Referencia::all()->where('id','=',$cita->id_real)->first()))
+                                        <td><strong>Realizado Por:</strong> {{$referencia->nombre_ref}}</td>
+                                    @endif
                                 </tr>
                             </tbody>
                             @endforeach

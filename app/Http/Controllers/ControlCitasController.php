@@ -24,7 +24,7 @@ class ControlCitasController extends Controller
             ->join('referencias', 'citas.id_ref', 'referencias.id')
             ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
             ->where('citas.fecha','=',$fecha)
-            ->orderBy('consultorios.nombre_consult', 'asc')
+            ->orderBy('citas.fecha', 'asc')
             ->paginate(4);
         return view('controlcitas.verificar_citas',compact('query'));
     }
@@ -55,6 +55,7 @@ class ControlCitasController extends Controller
                 ->join('referencias', 'citas.id_ref', 'referencias.id')
                 ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
                 ->where('citas.fecha','=',$fecha)
+                ->orderBy('citas.fecha', 'asc')
                 ->paginate(4);
                 return view('controlcitas.verificar_citas',compact('query'));
         }else{
@@ -68,7 +69,9 @@ class ControlCitasController extends Controller
                 ->where(function($query) use ($consulta){
                         $query->where('pacientes.cedula','like','%'.$consulta.'%')
                        ->orWhere('pacientes.nombre','like','%'.$consulta.'%');
-                })->paginate(4);
+                })
+                ->orderBy('citas.fecha', 'asc')
+                ->paginate(4);
             return view('controlcitas.verificar_citas',compact('query'));
         }
     }
@@ -86,6 +89,7 @@ class ControlCitasController extends Controller
                 ->join('referencias', 'citas.id_ref', 'referencias.id')
                 ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
                 ->where('citas.fecha','=',$fecha)
+                ->orderBy('citas.fecha', 'asc')
                 ->paginate(4);
                 return view('controlcitas.verificar_citas_fecha',compact('query'));
         }else if ($fecha1 !== '' || $fecha2 !== ''){
@@ -99,7 +103,9 @@ class ControlCitasController extends Controller
                 ->where(function($query) use ($consulta){
                         $query->where('pacientes.cedula','like','%'.$consulta.'%')
                        ->orWhere('pacientes.nombre','like','%'.$consulta.'%');
-                })->paginate(4);
+                })
+                ->orderBy('citas.fecha', 'asc')
+                ->paginate(4);
             return view('controlcitas.verificar_citas_fecha',compact('query','fecha1','fecha2'));
         }
     }

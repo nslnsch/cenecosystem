@@ -16,7 +16,7 @@
                             <br />
                             Para ver las instrucciones para habilitar javascript<br />
                             en su navegador, haga click
-                            <a href="http://www.enable-javascript.com/es/"
+                            <a href="manuales/habilitarJavaScript.html"
                             target="_blank">aquí</a>.
                         </div>
                     </div>

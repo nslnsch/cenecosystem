@@ -25,7 +25,7 @@
                         <form action="{{route('verify_cita')}}" method="get">
                             <div class="form-group row">
                                 <div class="col-md-6 col-md-push-8">
-                                    <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="Buscar citas por Cédula ó por Nombre" style="border-width: 0;outline: 0;" autocomplete="off"><button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Buscar</button>
+                                    <input type="text" class="form-controller" id="search" maxlength="25" name="search" autofocus placeholder="Buscar" title="Buscar citas por Cédula ó por Nombre" style="border-width: 0;outline: 0;" autocomplete="off"><button type="submit" class="btn btn-primary" title="Buscar"><i class="fas fa-search"></i> Buscar</button>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-6 col-md-push-8">
                                     <a href="{{route('home')}}" class="btn btn-danger float-right d-block ml-auto" title="Cerrar"><i class="fas fa-times"></i> Cerrar</a>

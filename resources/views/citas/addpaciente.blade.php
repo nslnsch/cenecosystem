@@ -135,17 +135,17 @@
                                 </div>
                                 <div class="col-md-3 col-md-push-8"{{ $errors->has('cedula') ? 'has-error' : '' }}>
                                     <label for="Cedula" class="text-primary">Cédula</label>
-                                    <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e]{1})-([0-9]{7,9})-?([0-9]{1,1}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de niños sin cédula ingresar V-00000000-0" placeholder="Cédula">
+                                    <input type="text" name="cedula" id="cedula"  class="form-control" required class="form-control" pattern="^([V|v|E|e]{1})-([0-9]{7,9})-?([0-9]{1,1}?)$" title="La cédula de identidad debe tener el formato V-00000000 sin puntos. En caso de niños sin cédula ingresar V-00000000-0" placeholder="Cédula" autocomplete="off">
                                     {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                 </div>
                                 <div class="col-md-3 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
                                     <label for="nombre" class="text-primary">Nombres</label>
-                                    <input type="text" name="nombre" required class="form-control" id="nombre" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL nombre no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Nombre">
+                                    <input type="text" name="nombre" required class="form-control" id="nombre" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL nombre no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Nombre" autocomplete="off">
                                     {!! $errors -> first('nombre', '<span class=error>:message</span>') !!}
                                 </div>
                                 <div class="col-md-3 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
                                     <label for="apellido" class="text-primary">Apellidos</label>
-                                    <input type="text" name="apellido" required class="form-control" id="apellido" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL apellido no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Apellido">
+                                    <input type="text" name="apellido" required class="form-control" id="apellido" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL apellido no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Apellido" autocomplete="off">
                                     {!! $errors -> first('apellido', '<span class=error>:message</span>') !!}
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                             <div class="form-group row">
                                 <div class="col-md-4 col-md-push-8" {{ $errors->has('telefono') ? 'has-error' : '' }}>
                                     <label for="telefono" class="text-primary">Teléfono</label>
-                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del telefono debe ser el siguiente 0424-3333333" placeholder="Teléfono">
+                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del telefono debe ser el siguiente 0424-3333333" placeholder="Teléfono" autocomplete="off">
                                     {!! $errors -> first('telefono', '<span class=error>:message</span>') !!}
                                 </div>
                                 <div class="col-md-4 col-md-push-8" {{ $errors->has('fecnac') ? 'has-error' : '' }}>
@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="col-md-4 col-md-push-8" {{ $errors->has('direccion') ? 'has-error' : '' }}>
                                     <label for="direccion" class="text-primary">Dirección</label>
-                                    <textarea id="dir" placeholder="Dirección" name="direccion" required class="form-control" title="El campo dirección es requerido"></textarea>
+                                    <textarea id="dir" placeholder="Dirección" name="direccion" required class="form-control" title="El campo dirección es requerido" autocomplete="off"></textarea>
                                     {!! $errors -> first('direccion', '<span class=error>:message</span>') !!}
                                 </div>
                             </div>

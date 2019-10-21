@@ -30,7 +30,10 @@
                           <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <p><strong><h4 class="btn-danger" style="text-align: center;">Manuales de Usuario</h4></strong></p>
-                                <p><a href="../manuales/PlandeCapacitaciónCeneco.pdf" target="blank">Plan de Capacitación</a></p>
+                                <p><a href="manuales/MANUALDEUSUARIO.pdf" target="blank">Manual de Usuario</a></p>
+                                @role('super-admin')
+                                <p><a href="#" target="blank">Manual del Sistema</a></p>
+                                @endrole
                             </div>
                           </div>
                         </div>
@@ -38,11 +41,13 @@
                           <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                               <p><strong><h4 class="btn-danger" style="text-align: center;">Versiónes de Desarrollo</h4></strong></p>
-                              <p>Versión de Apache/<strong>2.4.33</strong>(Win32) OpenSSL/<strong>1.1.0h</strong></p>
-                              <p>Versión del cliente de base de datos: <strong>libmysql - mysqlnd 5.0.12-dev</strong></p>
-                              <p>Versión de PHP: <strong>7.2.7</strong></p>
-                              <p>Laravel: <strong>5.8</strong></p>
-                              <p>Versión de Bootstrap: <strong>4.0</strong></p>
+                              <p>Versión de Apache/<strong>2.4.35</strong> OpenSSL/<strong>1.1.1d</strong></p>
+                              <p>Versión del cliente del Servidor Web: <strong>libmysql - mysqlnd 5.0.12-dev</strong></p>
+                              <p>Versión del Servidor de Base de Datos: <strong>5.7.24 - MySQL Community Server (GPL)</strong></p>
+                              <p>Versión de Laravel: <strong>5.8</strong></p>
+                              <p>Versión de PHP: <strong>7.3.10</strong></p>
+                              <p>Versión de Bootstrap: <strong>4.3.1</strong></p>
+                              <p>Versión de jQuery: <strong>3.4.1</strong></p>
                             </div>
                           </div>
                         </div>

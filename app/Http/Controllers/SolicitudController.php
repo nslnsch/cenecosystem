@@ -8,6 +8,7 @@ use App\Consultorio;
 use App\Referencia;
 use App\Estudio;
 use App\CompEstudios;
+use App\CitaRef;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -98,7 +99,7 @@ class SolicitudController extends Controller
         $cedula = $request->cedula;
         $paciente = Paciente::all()->where('cedula', 'like',$cedula);
         if (!$paciente->isEmpty()){
-            return view('citas.selreferencia',compact('paciente','consultorio','referencia','cons1','cons2','cons3','cons4','limit_c1','limit_c2','limit_c3','limit_c4','c1','c2','c3','c4'));
+            return view('citas.selreferencia',compact('paciente','referencia','cons1','cons2','cons3','cons4','limit_c1','limit_c2','limit_c3','limit_c4','c1','c2','c3','c4'));
         }else{
             Session::flash('message','El Paciente no esta Registrado');
             return redirect()-> route('paciente.create');
@@ -139,7 +140,8 @@ class SolicitudController extends Controller
                 ->join('estudios', 'citas.id_est', 'estudios.id')
                 ->join('consultorios', 'estudios.id_consult', 'consultorios.id')
                 ->join('referencias', 'citas.id_ref', 'referencias.id')
-                ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref')
+                ->join('cita_refs', 'cita_refs.id_cita', 'citas.id')
+                ->select('citas.*','pacientes.nombre','pacientes.apellido','pacientes.cedula','pacientes.telefono','estudios.nombre_est','consultorios.nombre_consult','referencias.nombre_ref','cita_refs.id_real')
                 ->where('citas.id_pac','=',$paciente->id)
                 ->paginate(2);
             return view('consultas.historial',compact('query','paciente'));

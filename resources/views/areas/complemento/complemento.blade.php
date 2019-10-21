@@ -35,7 +35,7 @@
                                     <tr>
                                         <td>{{$dato->id_est}}</td>
                                         <td>{{$dato->subestudio}}</td>
-                                        <td>{{$dato->precio}} Bs.</td>
+                                        <td>{{number_format($dato->precio)}} Bs.</td>
                                         <td>
                                             <a href="{{route('subestudios.edit',$dato->id)}}" class="btn btn-warning">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>

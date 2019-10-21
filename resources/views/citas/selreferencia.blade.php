@@ -12,7 +12,7 @@
 
                     $.each(referencia, function (index, value) {
                         $('#referencia').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
 		});
@@ -30,7 +30,7 @@
 
                     $.each(buscador, function (index, value) {
                         $('#referencia').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
 		});
@@ -48,7 +48,7 @@
 
                     $.each(referencia, function (index, value) {
                         $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
 		});
@@ -66,7 +66,7 @@
 
                     $.each(buscador, function (index, value) {
                         $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
 		});
@@ -197,7 +197,7 @@
 					</div>
 					<div class="col-md-4 col-md-push-8">
 					  <div class="custom-control custom-radio custom-control-inline">
-						<select id="referencia2" name="id_real"  name="referencia" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Quien Realiza el Estudio</option></select>
+						<select id="referencia2" name="id_real" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected>Quien Realiza el Estudio</option></select>
 					  </div>
 					</div>
 		          </div>
@@ -207,7 +207,7 @@
 		                <button type="submit"  style="display: block; margin-right: auto;" class="btn btn-md btn-primary" id="enviar" title="Enviar Referencia" onclick="return vldref()"><i class="far fa-paper-plane"></i> Enviar</button>
 		            </div>
 		            <div class="col-6">
-		                  <a href="{{route('home')}}" style="text-decoration:none;display:block;margin-left:auto;max-width:30%;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</a>
+		                <a href="{{route('home')}}" style="text-decoration: none;"><button style="display:block;margin-left:auto;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</button></a>
 		            </div>
 		          </div>
 	        </form>

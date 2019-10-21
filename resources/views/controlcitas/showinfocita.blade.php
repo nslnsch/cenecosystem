@@ -64,63 +64,61 @@
                           <h6 class="text-primary">Datos de la Cita</h6>
                           <hr>
                             <input class="form-control" id="edad" name="edad" type="hidden" placeholder="Edad" value="{{$edad->y}}" title="Edad del Paciente" >
-                            @foreach ($datos as $dato)
                               <div class="form-group row">
                                   <div class="col-md-4 col-md-push-8">
                                       <label for="estado">Estado del Estudio</label>
-                                      <input type="text" name="estado" disabled id="estado" required title="Estado del Estudio" value="{{$dato->estado}}" class="form-control">
+                                      <input type="text" name="estado" disabled id="estado" required title="Estado del Estudio" value="{{$datos->estado}}" class="form-control">
                                   </div>
                                   <div class="col-md-4 col-md-push-8">
                                       <label for="consultorio">Consultorio</label>
-                                      <input type="text" id="consultorio" disabled name="consultorio" title="Consultorio" value="{{$dato->nombre_consult}}" class="form-control">
+                                      <input type="text" id="consultorio" disabled name="consultorio" title="Consultorio" value="{{$datos->nombre_consult}}" class="form-control">
                                   </div>
                                   <div class="col-md-4 col-md-push-8">
                                       <label for="estudio">Estudio</label>
-                                      <input type="text" id="estudio" disabled name="estudio" title="Estudio" value="{{$dato->nombre_est}}" class="form-control">
+                                      <input type="text" id="estudio" disabled name="estudio" title="Estudio" value="{{$datos->nombre_est}}" class="form-control">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-md-3 col-md-push-8">
                                       <label for="subest">Sub-estudio</label>
-                                      <input type="text" id="subest" disabled name="subest" title="Sub-Estudio" value="{{$dato->comp}}" class="form-control">
+                                      <input type="text" id="subest" disabled name="subest" title="Sub-Estudio" value="{{$datos->comp}}" class="form-control">
                                   </div>
                                   <div class="col-md-2 col-md-push-8">
                                       <label for="precio">Precio</label>
-                                      <input type="text" id="precio" disabled name="precio" title="Precio del Estudio" value="{{$dato->costo}}" class="form-control">
+                                      <input type="text" id="precio" disabled name="precio" title="Precio del Estudio" value="{{number_format($datos->costo)}} Bs." class="form-control">
                                   </div>
                                   <div class="col-md-2 col-md-push-8">
-                                      @if ($dato->tipo_cita == 'P')
+                                      @if ($datos->tipo_cita == 'P')
                                         <label for="tipo_cita">Tipo de Cita</label>
                                         <input type="text" name="tipo_cita" id="tipo_cita" disabled required title="Tipo de cita" value="Presencial" class="form-control">
-                                      @elseif($dato->tipo_cita == 'T')
+                                      @elseif($datos->tipo_cita == 'T')
                                         <label for="tipo_cita">Tipo de Cita</label>
                                         <input type="text" name="tipo_cita" id="tipo_cita" disabled required title="Tipo de cita" value="Telefonica" class="form-control">
                                       @endif
                                   </div>
                                   <div class="col-md-2 col-md-push-8">
                                       <label for="fecha">Fecha de Registro</label>
-                                      <input type="text" disabled name="fecha" id="fecha" value="{{ Date::parse($dato->fecha)->format('d/m/Y')}}" class="form-control" title="fecha de registro">
+                                      <input type="text" disabled name="fecha" id="fecha" value="{{ Date::parse($datos->fecha)->format('d/m/Y')}}" class="form-control" title="fecha de registro">
                                   </div>
                                   <div class="col-md-3 col-md-push-8">
                                     <label for="recibido">Recibido Por</label>
-                                    <input type="text" id="recibido" disabled name="recibido" title="Recibido Por:" value="{{$dato->recibido}}" class="form-control">
+                                    <input type="text" id="recibido" disabled name="recibido" title="Recibido Por:" value="{{$datos->recibido}}" class="form-control">
                                   </div>
                               </div>
                               <div class="form-group row">
                                   <div class="col-md-4 col-md-push-8">
                                       <label for="id_ref">Informado Por</label>
-                                      <input type="text" id="id_ref" disabled name="id_ref" title="Informado Por" value="{{$dato->nombre_ref}}" class="form-control">
+                                      <input type="text" id="id_ref" disabled name="id_ref" title="Informado Por" value="{{$datos->nombre_ref}}" class="form-control">
                                   </div>
                                   <div class="col-md-4 col-md-push-8">
                                       <label for="id_real">Realizado Por</label>
-                                      <input type="text" id="id_real" disabled name="id_real" title="Realizado Por" value="{{$dato->id_real}}" class="form-control">
+                                      <input type="text" id="id_real" disabled name="id_real" title="Realizado Por" value="{{$referencia->nombre_ref}}" class="form-control">
                                   </div>
                                   <div class="col-md-4 col-md-push-8">
                                     <label for="edo_pago">Estado de Pago</label>
-                                    <input type="text" id="edo_pago" disabled name="edo_pago" title="Estado de Pago" value="{{$dato->estado_pago}}" class="form-control">
+                                    <input type="text" id="edo_pago" disabled name="edo_pago" title="Estado de Pago" value="{{$datos->estado_pago}}" class="form-control">
                                   </div>
                               </div>
-                            @endforeach
                             <div class="form-group row">
                                 <div class="col-md-12">
                                     <a href="{{ url()->previous() }}" class="btn btn-danger d-block float-right ml-auto"><i class="fas fa-undo-alt"></i> Regresar</a>

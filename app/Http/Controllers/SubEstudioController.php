@@ -57,7 +57,7 @@ class SubEstudioController extends Controller
         $subestudio = new CompEstudios;
         $subestudio->id_est = $request->cod_estudio;
         $subestudio->subestudio = strtoupper($request->subestudio);
-        $subestudio->precio = $request->precio;
+        $subestudio->precio = intval(preg_replace('/[^0-9]+/', '', $request->precio), 10);
         $subestudio->save();
         Session::flash('message','Sub-Estudio Registrado con Exito!');
         return redirect()-> route('subestudios.index');
@@ -100,7 +100,7 @@ class SubEstudioController extends Controller
         );
         $subestudio->id_est = $request->cod_estudio;
         $subestudio->subestudio = strtoupper($request->subestudio);
-        $subestudio->precio = $request->precio;
+        $subestudio->precio = intval(preg_replace('/[^0-9]+/', '', $request->precio), 10);
         $subestudio->save();
         Session::flash('message','Sub-Estudio Actualizado con Exito!');
         return redirect()-> route('subestudios.index');

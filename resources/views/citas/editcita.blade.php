@@ -74,6 +74,62 @@
             });
         });
     </script>
+    <!----//seccion de busqueda quien realiza el estudio------------------------------------------>
+    <script>
+      $(document).ready(function(){
+        $('.real').click(function () {
+          var tipo_ref = $('input:radio[name=ref2]:checked').val();
+          if ($.trim(tipo_ref) != '') {
+                    $.get('../../getreferencia/', {tipo_ref: tipo_ref}, function (referencia) {
+                        $('#referencia2').empty();
+                        $('#referencia2').append("<option value=''>Quien Realiza el Estudio</option>");
+
+                        $.each(referencia, function (index, value) {
+                            $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
+                        });
+                    });
+                }
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('#search2').keyup(function () {
+          var buscar = $('#search2').val();
+          var tipo_ref = $('input:radio[name=ref2]:checked').val();
+          if ($.trim(tipo_ref) != '') {
+                    $.get('../../getfiltrar/', {tipo_ref: tipo_ref,buscar: buscar}, function (buscador) {
+                        $('#referencia2').empty();
+                        $('#referencia2').append("<option value=''>Quien Realiza el Estudio</option>");
+
+                        $.each(buscador, function (index, value) {
+                            $('#referencia2').append("<option value='" + index + "'>" + value +"</option>");
+                        });
+                    });
+                }
+        });
+      });
+    </script>
+    <!-------------validacion de listas desplegables------------------------------------------------>
+    <script>
+      $(document).ready(function(){
+            $("#frmeditcita").submit(function() {
+              var focus1;
+                var ref2 = $('#referencia2').val().trim();
+                if(ref2 == 0){
+                    swal({
+                      type: "info",
+                      title: "Debe seleccionar quien realizará el estudio!",
+                      showConfirmButton: false,
+                      timer: 3000
+                    });
+                    focus1 = document.getElementById("referencia2").focus();
+                    return false;
+                }else{}
+            });
+      });
+    </script>
+    <!---------------------------------------------------------------------------------------------->
     @inject('consultorios', 'App\Services\Consultorios')
     <div class="container-fluid with-mt">
         <div class="row justify-content-center">
@@ -83,7 +139,7 @@
                         <h4>Actualizar Cita</h4><i class="far fa-question-circle" style="float: right;margin-top: -30px;font-size: 20px;" data-toggle="modal" data-target="#modal_help" title="Ayuda"></i>
                     </div>
                     <div class="card-body">
-                    <form method="POST" action="{{route('citas.update',$datocita->id)}}">
+                    <form method="POST" id="frmeditcita" action="{{route('citas.update',$datocita->id)}}">
                         @csrf
                         @method('PUT')
                         <h6 class="text-primary">Datos Personales del Paciente</h6>
@@ -170,7 +226,7 @@
                             <div class="form-group row">
                                 <div class="col-md-4 col-md-push-8">
                                     <label for="precio">Precio</label>
-                                    <select id="precio"  name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" title="Seleccione Precio"><option selected>{{$datocita->costo}}</option></select>
+                                    <select id="precio"  name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" title="Seleccione Precio"><option selected value="{{$datocita->costo}}">{{number_format($datocita->costo)}} Bs.</option></select>
                                     @if ($errors->has('precio'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('precio') }}</strong>
@@ -197,17 +253,34 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-6 col-md-push-8" {{ $errors->has('id_real') ? 'has-error' : '' }}>
-                                    <label for="id_real">Realizado Por</label>
-                                    <select name="id_real" id="id_real" required class="form-control" title="Realizado Por">
-                                      <option selected value="{{$datocita->id_real}}">{{$datocita->id_real}}</option>
-                                        @foreach ($referencia as  $value)
-                                          @if ($value->tipo_ref == 'INT')
-                                            <option value="{{$value->nombre_ref}}">{{$value->nombre_ref}}</option>
-                                          @endif
-                                        @endforeach
-                                    </select>
-                                    {!! $errors -> first('id_real', '<span class=error>:message</span>') !!}
+                                <div class="col-md-6 col-md-push-8">
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input real" id="customRadio1" name="ref2" value="MED">
+                                                <label class="custom-control-label" for="customRadio1">Médicos</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input real" id="customRadio2" name="ref2" value="TEC">
+                                                <label class="custom-control-label" for="customRadio2">Técnicos</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="text" class="form-controller" id="search2" maxlength="25" name="search" autofocus placeholder="Buscar" title="buscar referencias" autocomplete="off" style="outline: 0;border-width: 0;">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <label for="id_real">Quien realiza el estudio
+                                                <select id="referencia2" name="id_real" class="form-control" title="Selecciona una Referencia" onchange="vldref(this.value);"><option selected value="{{$referencia->id}}">{{$referencia->nombre_ref}}</option></select></label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 col-md-push-8" {{ $errors->has('edo_pago') ? 'has-error' : '' }}>
                                     <label for="edo_pago">Estado de Pago</label>
@@ -247,7 +320,7 @@
 
                     $.each(estudios, function (index, value) {
                         $('#estudio').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
       });
@@ -264,7 +337,7 @@
 
                     $.each(Subestudios, function (index, value) {
                         $('#subest').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                    });
                 });
             }
       });
@@ -274,14 +347,29 @@
     $(document).ready(function(){
       $('#subest').on('change',function(){
             var subest = $(this).val();
+            function number_format(amount, decimals) {
+                amount += ''; // por si pasan un numero en vez de un string
+                amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+                decimals = decimals || 0; // por si la variable no fue fue pasada
+                // si no es un numero o es igual a cero retorno el mismo cero
+                if (isNaN(amount) || amount === 0)
+                    return parseFloat(0).toFixed(decimals);
+                // si es mayor o menor que cero retorno el valor formateado como numero
+                amount = '' + amount.toFixed(decimals);
+                var amount_parts = amount.split('.'),
+                    regexp = /(\d+)(\d{3})/;
+                while (regexp.test(amount_parts[0]))
+                    amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+                return amount_parts.join('.');
+            }
             if ($.trim(subest) != '') {
                 $.get('../../getprecio/', {subest: subest}, function (Subestudiosprecio) {
                     $('#precio').empty();
                     $('#precio').append("<option value=''>Seleccione Precio</option>");
 
                     $.each(Subestudiosprecio, function (index, value) {
-                        $('#precio').append("<option value='" + index + "'>" + value +"</option>");
-                    })
+                        $('#precio').append("<option value='" + index + "'>" + number_format(value) +' Bs.'+"</option>");
+                    });
                 });
             }
       });

@@ -13,7 +13,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Ingrese E-mail</label>
                                 <div class="col-md-6 inner-addon left-addon">
                                     <i class="far fa-user glyphicon"></i>
-                                    <input autofocus id="email" placeholder="Ingrese E-mail" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com">
+                                    <input autofocus id="email" placeholder="Ingrese E-mail" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com" autofocus="autofocus">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

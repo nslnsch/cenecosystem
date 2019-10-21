@@ -18,51 +18,51 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '1',
             'subestudio' => '1M.EMG',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '1',
             'subestudio' => '2M.EMG',
-            'precio' => '250.000'
+            'precio' => '250000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '1',
             'subestudio' => '4M.EMG',
-            'precio' => '300.000'
+            'precio' => '300000'
         ]);
 
         //Complemento del estudio VC
         $consultorio=CompEstudios::create([
             'id_est' => '2',
             'subestudio' => '1M.VC',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '2',
             'subestudio' => '2M.VC',
-            'precio' => '250.000'
+            'precio' => '250000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '2',
             'subestudio' => '4M.VC',
-            'precio' => '300.000'
+            'precio' => '300000'
         ]);
 
         //Complemento del estudio EMG+VC
         $consultorio=CompEstudios::create([
             'id_est' => '3',
             'subestudio' => '1M.EMG.VC',
-            'precio' => '400.000'
+            'precio' => '400000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '3',
             'subestudio' => '2M.EMG.VC',
-            'precio' => '500.000'
+            'precio' => '500000'
         ]);
         $consultorio=CompEstudios::create([
             'id_est' => '3',
             'subestudio' => '4M.EMG.VC',
-            'precio' => '600.000'
+            'precio' => '600000'
         ]);
 
         //Complemento del estudio PEA C1
@@ -76,14 +76,14 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '5',
             'subestudio' => 'U.PEV',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
 
         //Complemento del estudio PESS
         $consultorio=CompEstudios::create([
             'id_est' => '6',
             'subestudio' => 'U.PESS',
-            'precio' => '250.000'
+            'precio' => '250000'
         ]);
 
         //Complemento del estudio PEM
@@ -99,7 +99,7 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '8',
             'subestudio' => 'U.TNFB',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
 
         //Complemento del estudio AUD
@@ -122,7 +122,7 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '11',
             'subestudio' => 'U.EEG.C3',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
 
         //Complemento del estudio BM
@@ -136,7 +136,7 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '13',
             'subestudio' => 'U.ONDA.P300',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
 
         //Complemento del estudio EEG+ONDA P300
@@ -158,7 +158,7 @@ public function run()
         $consultorio=CompEstudios::create([
             'id_est' => '16',
             'subestudio' => 'U.EEG.C4',
-            'precio' => '200.000'
+            'precio' => '200000'
         ]);
     }
 }
