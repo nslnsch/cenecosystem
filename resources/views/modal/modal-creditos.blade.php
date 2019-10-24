@@ -32,7 +32,7 @@
                                 <p><strong><h4 class="btn-danger" style="text-align: center;">Manuales de Usuario</h4></strong></p>
                                 <p><a href="manuales/MANUALDEUSUARIO.pdf" target="blank">Manual de Usuario</a></p>
                                 @role('super-admin')
-                                <p><a href="#" target="blank">Manual del Sistema</a></p>
+                                <p><a href="manuales/MANUALDELSISTEMA.pdf" target="blank">Manual del Sistema</a></p>
                                 @endrole
                             </div>
                           </div>
