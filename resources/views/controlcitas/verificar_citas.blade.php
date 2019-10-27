@@ -42,8 +42,8 @@
                             <thead>
                                 <tr>
                                     <th>Cédula</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
                                     <th>Consultorio</th>
                                     <th>Estudio</th>
                                     <th>Sub-Estudio</th>

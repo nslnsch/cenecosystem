@@ -32,14 +32,14 @@
             <h3>REPORTE DE BITACORA</h3>
             <hr>
             <header>
-                <p>Reporte de Bitacora dia: {{ Date::parse($request_fecha)->format('d/m/Y')}} </p>
+                <p>Reporte de Bitácora día: {{ Date::parse($request_fecha)->format('d/m/Y')}} </p>
             </header>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-hover table-striped table-sm">
                         <thead style="font-size: 14px;">
                             <tr>
-                                <th scope="col">Codigo Usuario</th>
+                                <th scope="col">Código Usuario</th>
                                 <th scope="col">IP</th>
                                 <th scope="col">log</th>
                                 <th scope="col">Fecha</th>

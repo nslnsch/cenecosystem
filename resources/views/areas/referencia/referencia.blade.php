@@ -28,7 +28,7 @@
                                 <th>Tipo de Persona</th>
                                 <th>Rif Referencia</th>
                                 <th>Nombre</th>
-                                <th>Telefono</th>
+                                <th>Teléfono</th>
                                 <th>Tipo</th>
                                 <th>Acciones</th>
                             </thead>

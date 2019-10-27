@@ -97,11 +97,11 @@
                               <input class="form-control" disabled id="ced" type="text" placeholder="Cédula" value="{{$pac->cedula}}" title="Cédula del Paciente">
                             </div>
                             <div class="col-md-3 col-md-pull-8">
-                              <label for="nom">Nombre</label>
+                              <label for="nom">Nombres</label>
                               <input class="form-control" disabled id="nom" type="text" placeholder="Nombre" title="Nombre del Paciente" value="{{$pac->nombre}}">
                             </div>
                             <div class="col-md-3 col-md-pull-8">
-                              <label for="ape">Apellido</label>
+                              <label for="ape">Apellidos</label>
                               <input class="form-control" disabled id="ape" type="text" placeholder="Apellido" title="Apellido del Paciente" value="{{$pac->apellido}}">
                             </div>
                           </div>

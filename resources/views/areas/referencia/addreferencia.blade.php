@@ -85,7 +85,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6 col-md-push-8" {{ $errors->has('telefono') ? 'has-error' : '' }}>
                                     <label for="telefono" class="text-primary">Teléfono</label>
-                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del telefono debe ser el siguiente 0424-3333333" placeholder="Teléfono Referencia" value="{{ old('telefono') }}">
+                                    <input type="text" name="telefono" required class="form-control" id="telefono" pattern="^[0-9]{4}-[0-9]{7}$" maxlength="12" title="El formato del teléfono debe ser el siguiente 0424-3333333" placeholder="Teléfono Referencia" value="{{ old('telefono') }}">
                                     {!! $errors -> first('telefono', '<span class=error>:message</span>') !!}
                                 </div>
                                 <div class="col-md-6 col-md-push-8" {{ $errors->has('tipo') ? 'has-error' : '' }}>

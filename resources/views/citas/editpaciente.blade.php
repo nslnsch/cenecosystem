@@ -140,12 +140,12 @@
                                         {!! $errors -> first('cedula', '<span class=error>:message</span>') !!}
                                     </div>
                                     <div class="col-md-3 col-md-push-8" {{ $errors->has('nombre') ? 'has-error' : '' }}>
-                                        <label for="nombre" class="text-primary">Nombre</label>
+                                        <label for="nombre" class="text-primary">Nombres</label>
                                         <input type="text" name="nombre" required class="form-control" id="nombre" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL nombre no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Nombre" value="{{$pac->nombre}}">
                                         {!! $errors -> first('nombre', '<span class=error>:message</span>') !!}
                                     </div>
                                     <div class="col-md-3 col-md-push-8" {{ $errors->has('apellido') ? 'has-error' : '' }}>
-                                        <label for="apellido" class="text-primary">Apellido</label>
+                                        <label for="apellido" class="text-primary">Apellidos</label>
                                         <input type="text" name="apellido" required class="form-control" id="apellido" pattern="^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$" minlength="3" maxlength="20" title="EL apellido no debe estar vacio y debe contener solo letras y tener un minimo de 3 caracteres y un maximo de 20" placeholder="Apellido" value="{{$pac->apellido}}">
                                         {!! $errors -> first('apellido', '<span class=error>:message</span>') !!}
                                     </div>

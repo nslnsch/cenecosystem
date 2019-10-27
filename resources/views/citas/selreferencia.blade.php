@@ -207,7 +207,7 @@
 		                <button type="submit"  style="display: block; margin-right: auto;" class="btn btn-md btn-primary" id="enviar" title="Enviar Referencia" onclick="return vldref()"><i class="far fa-paper-plane"></i> Enviar</button>
 		            </div>
 		            <div class="col-6">
-		                <a href="{{route('home')}}" style="text-decoration: none;"><button style="display:block;margin-left:auto;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</button></a>
+		                <a href="{{route('home')}}" style="text-decoration: none;"><button style="display:block;margin-left:auto;" class="btn btn-danger" type="button"><i class="fas fa-times"></i> Cerrar</button></a>
 		            </div>
 		          </div>
 	        </form>

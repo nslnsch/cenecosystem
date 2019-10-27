@@ -22,7 +22,7 @@
 
                             <div class="col-md-6 inner-addon left-addon">
                                 <i class="far fa-user glyphicon"></i>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus  pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus  pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com" placeholder="Ingrese E-mail">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" title="Enviar E-mail">
                                     Enviar E-mail
                                 </button>
                             </div>

@@ -18,7 +18,7 @@
 
                             <div class="col-md-6 inner-addon left-addon">
                                 <i class="far fa-user glyphicon"></i>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus pattern="[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+" title="Formato de Correo: ceneco@ceneco.com" placeholder="Ingrese E-mail">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +33,7 @@
 
                             <div class="col-md-6 inner-addon left-addon">
                                 <i class="fas fa-key glyphicon"></i>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" oninput="check_text(this);" title="La Contraseña debe tener minimo 8 caracteres y al menos: 1 minúscula, 1 mayúscula, 1 número, 1 símbolo">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" oninput="check_text(this);" title="La Contraseña debe tener minimo 8 caracteres y al menos: 1 minúscula, 1 mayúscula, 1 número, 1 símbolo" placeholder="Nueva contraseña">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -48,13 +48,13 @@
 
                             <div class="col-md-6 inner-addon left-addon">
                                 <i class="fas fa-key glyphicon"></i>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" oninput="check_text(this);" title="La Contraseña debe tener minimo 8 caracteres y al menos: 1 minúscula, 1 mayúscula, 1 número, 1 símbolo">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" oninput="check_text(this);" title="La Contraseña debe tener minimo 8 caracteres y al menos: 1 minúscula, 1 mayúscula, 1 número, 1 símbolo" placeholder="Confirmar Contraseña">
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" title="Recuperar Contraseña">
                                     Recuperar Contraseña
                                 </button>
                             </div>

@@ -68,7 +68,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card" style="border-radius: 10px;">
-                <div class="card-header bg-primary">Informe del Dia
+                <div class="card-header bg-primary">Informe del Día
                     <ul class="nav navbar-nav btn d-block float-right ml-auto" style="margin-top: -45px;">
                         @if(count(config('panel.available_languages', [])) > 1)
                             <li class="nav-item dropdown d-md-down-none">

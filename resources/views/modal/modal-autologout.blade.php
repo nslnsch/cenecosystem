@@ -1,4 +1,4 @@
- <div id="message-alert-logout" class="modal">
+ <div id="message-alert-autologout" class="modal">
  	<div class="modal-dialog">
 	    <div class="modal-content">
             <div class="modal-header bg-primary">

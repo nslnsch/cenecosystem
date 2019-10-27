@@ -29,11 +29,15 @@
                         <div class="modal fade manual" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-sm">
                             <div class="modal-content">
-                                <p><strong><h4 class="btn-danger" style="text-align: center;">Manuales de Usuario</h4></strong></p>
-                                <p><a href="manuales/MANUALDEUSUARIO.pdf" target="blank">Manual de Usuario</a></p>
-                                @role('super-admin')
-                                <p><a href="manuales/MANUALDELSISTEMA.pdf" target="blank">Manual del Sistema</a></p>
-                                @endrole
+                                <p><strong><h4 class="btn-danger" style="text-align: center;">Manuales</h4></strong></p>
+                                <ul>
+                                  <li><p><a href="manuales/MANUALDEUSUARIO.pdf" target="blank">Manual de Usuario</a></p></li>
+                                  @role('super-admin')
+                                  <li>
+                                    <p><a href="manuales/MANUALDELSISTEMA.pdf" target="blank">Manual del Sistema</a></p>
+                                  </li>
+                                  @endrole
+                                </ul>
                             </div>
                           </div>
                         </div>
@@ -41,13 +45,15 @@
                           <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                               <p><strong><h4 class="btn-danger" style="text-align: center;">Versiónes de Desarrollo</h4></strong></p>
-                              <p>Versión de Apache/<strong>2.4.35</strong> OpenSSL/<strong>1.1.1d</strong></p>
-                              <p>Versión del cliente del Servidor Web: <strong>libmysql - mysqlnd 5.0.12-dev</strong></p>
-                              <p>Versión del Servidor de Base de Datos: <strong>5.7.24 - MySQL Community Server (GPL)</strong></p>
-                              <p>Versión de Laravel: <strong>5.8</strong></p>
-                              <p>Versión de PHP: <strong>7.3.10</strong></p>
-                              <p>Versión de Bootstrap: <strong>4.3.1</strong></p>
-                              <p>Versión de jQuery: <strong>3.4.1</strong></p>
+                              <ul>
+                                <li><p>Versión de Apache/<strong>2.4.35</strong> OpenSSL/<strong>1.1.1d</strong></p></li>
+                                <li><p>Versión del cliente del Servidor Web: <strong>libmysql - mysqlnd 5.0.12-dev</strong></p></li>
+                                <li><p>Versión del Servidor de Base de Datos: <strong>5.7.24 - MySQL Community Server (GPL)</strong></p></li>
+                                <li><p>Versión de Laravel: <strong>5.8</strong></p></li>
+                                <li><p>Versión de PHP: <strong>7.3.10</strong></p></li>
+                                <li><p>Versión de Bootstrap: <strong>4.3.1</strong></p></li>
+                                <li><p>Versión de jQuery: <strong>3.4.1</strong></p></li>
+                              </ul>
                             </div>
                           </div>
                         </div>

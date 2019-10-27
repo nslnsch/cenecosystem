@@ -105,7 +105,7 @@
         @include('modal/modal-help')
         @include('modal/modal-help-sub-estudio')
         @include('modal/modal-creditos')
-        @include('modal/modal-logout')
+        @include('modal/modal-autologout')
         <main class="main">
             <div style="padding-top: 20px" class="container-fluid">
                 @yield('content')
@@ -246,7 +246,7 @@
 		}(jQuery));
 
 		$(document).on('mousemoveend', function () {
-		    $('#message-alert-logout').modal();
+		    $('#message-alert-autologout').modal();
           timeLogout = setTimeout(function () {
             window.location = '{{route('logout')}}';
           }, 3000);

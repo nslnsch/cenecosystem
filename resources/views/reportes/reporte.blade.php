@@ -40,8 +40,8 @@
                     <table class="table table-hover table-striped table-sm">
                         <thead style="font-size: 14px;">
                             <tr>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
+                                <th scope="col">Nombres</th>
+                                <th scope="col">Apellidos</th>
                                 <th scope="col">Estudio</th>
                                 <th scope="col">Sub-Estudio</th>
                                 <th scope="col">Precio</th>

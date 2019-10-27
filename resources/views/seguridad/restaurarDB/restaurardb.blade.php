@@ -46,7 +46,7 @@
                                     <button type="button" class="btn btn-primary" id="enviar"><i class="far fa-paper-plane"></i> Restaurar</button>
                                 </div>
                                 <div class="col-6">
-                                      <a href="{{route('home')}}" style="text-decoration: none;"><button style="display:block;margin-left:auto;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</button></a>
+                                      <a href="{{route('home')}}" style="text-decoration: none;"><button type="button" style="display:block;margin-left:auto;" class="btn btn-danger"><i class="fas fa-times"></i> Cerrar</button></a>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -60,7 +60,4 @@
             </div>
         </div>
     </div>
-    <noscript>
-        <meta HTTP-EQUIV="REFRESH" CONTENT="0;{{URL::to('/')}}">
-    </noscript>
 @endsection

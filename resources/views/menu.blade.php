@@ -5,7 +5,7 @@
             <li class="nav-item">
             <a href="{{route('home')}}" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
-                    Menu
+                    Menú
                 </a>
             </li>
             <li class="nav-item nav-dropdown">

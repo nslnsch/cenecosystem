@@ -9,7 +9,7 @@
                 <div class="col-md-8">
                     <div class="card" style="border-radius: 10px;">
                         <div class="card-header text-primary">Iniciar Sesión</div>
-                        <div class="card-body">
+                        <div class="card-body" style="text-align: justify;">
                             Javascript está deshabilitado en su navegador web.<br />
                             Por favor, para ver correctamente este sitio,<br />
                             <b><i>habilite javascript</i></b>.<br />

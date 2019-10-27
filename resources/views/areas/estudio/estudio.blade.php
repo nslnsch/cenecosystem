@@ -25,7 +25,7 @@
                         </form>
                         <table class="table table-striped">
                             <thead>
-                                <th>Codigo_Consultorio</th>
+                                <th>Código_Consultorio</th>
                                 <th>Nombre_Estudio</th>
                                 <th>Acciónes</th>
                             </thead>
