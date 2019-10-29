@@ -241,7 +241,7 @@
 		        }
 		        timeout = window.setTimeout(function () {
 		            $(event.target).trigger('mousemoveend');
-		        }, 480000);
+		        }, 900000);
 		    });
 		}(jQuery));
 

@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 	    	<div class="modal-body">
-		        <p>No se ha detectado actividad durante los últimos 8 minutos.</p>
+		        <p>No se ha detectado actividad durante los últimos 15 minutos.</p>
 		        <p>En 30 segundos el sistema Ceneco Cerrará la Sesión Automaticamente.</p>
 	    	</div>
 	    	<div class="modal-footer"></div>

@@ -28,7 +28,7 @@
                             <div class="form-group row">
                                 <div class="col-md-6 col-md-push-8" {{ $errors->has('password') ? 'has-error' : '' }}>
                                     <label for="password" class="text-primary">Contraseña</label>
-                                    <input type="password" name="password" required class="form-control">
+                                    <input type="password" name="password" required class="form-control" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="La Contraseña debe tener minimo 8 caracteres y al menos: 1 minúscula, 1 mayúscula, 1 número, 1 símbolo">
                                     {!! $errors -> first('password', '<span class=error>:message</span>') !!}
                                 </div>
                                 <div class="col-md-6 col-md-push-8" {{ $errors->has('rol') ? 'has-error' : '' }}>
